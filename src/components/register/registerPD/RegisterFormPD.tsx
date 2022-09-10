@@ -6,27 +6,29 @@ import { Input, LoadingButton } from '../../ui';
 import { DefaultButton } from '../../ui/Buttons';
 
 import { IRegister } from '../../../interfaces/interfaces';
+import { registerController } from '../../../api/controllers/auth.controller';
 
 const RegisterFormPD = () => {
   const initialValues: IRegister = {
-    name: '',
-    lastname: '',
+    first_name: '',
+    last_name: '',
     username: '',
     email: '',
     address: '',
     phone: '',
     rut: '',
-    docNumber: '',
-    businessName: '',
-    productType: '',
+    doc_num: '',
+    business_name: '',
+    prod_type: '',
     password: '',
     confirmPassword: '',
+    tipo_usuario: '2',
     terms: false
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required('* Este campo es requerido.'),
-    lastname: Yup.string().required('* Este campo es requerido.'),
+    first_name: Yup.string().required('* Este campo es requerido.'),
+    last_name: Yup.string().required('* Este campo es requerido.'),
     username: Yup.string().required('* Este campo es requerido.'),
     email: Yup.string()
       .email('* Ingrese un correo válido.')
@@ -36,8 +38,8 @@ const RegisterFormPD = () => {
     rut: Yup.string()
       .required('* Este campo es requerido.')
       .matches(/^[0-9]+-[0-9kK]{1}$/, '* Ingrese un RUT válido.'),
-    docNumber: Yup.string().required('* Este campo es requerido.'),
-    businessName: Yup.string(),
+    doc_num: Yup.string().required('* Este campo es requerido.'),
+    business_name: Yup.string(),
     password: Yup.string().required('* Este campo es requerido.'),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password'), null], '* Las contraseñas no coinciden.')
@@ -50,7 +52,13 @@ const RegisterFormPD = () => {
 
   const onSubmit = (values: IRegister, actions: FormikHelpers<IRegister>) => {
     setTimeout(() => {
-      console.log(values);
+      const user = {
+        ...values,
+        tipo_usuario: '2'
+      };
+
+      registerController(user);
+
       actions.setSubmitting(false);
       actions.resetForm();
     }, 1500);
@@ -74,22 +82,22 @@ const RegisterFormPD = () => {
           <div className="grid gap-5 grid-cols-1 md:grid-cols-2">
             <Input
               type="text"
-              name="name"
+              name="first_name"
               label="Nombre *"
-              value={values.name}
-              touched={touched.name}
-              errors={errors.name}
+              value={values.first_name}
+              touched={touched.first_name}
+              errors={errors.first_name}
               onChange={handleChange}
               onBlur={handleBlur}
             />
 
             <Input
               type="text"
-              name="lastname"
+              name="last_name"
               label="Apellido *"
-              value={values.lastname}
-              touched={touched.lastname}
-              errors={errors.lastname}
+              value={values.last_name}
+              touched={touched.last_name}
+              errors={errors.last_name}
               onChange={handleChange}
               onBlur={handleBlur}
             />
@@ -153,11 +161,11 @@ const RegisterFormPD = () => {
 
             <Input
               type="text"
-              name="docNumber"
+              name="doc_num"
               label="Número de documento *"
-              value={values.docNumber}
-              touched={touched.docNumber}
-              errors={errors.docNumber}
+              value={values.doc_num}
+              touched={touched.doc_num}
+              errors={errors.doc_num}
               onChange={handleChange}
               onBlur={handleBlur}
             />
@@ -165,17 +173,17 @@ const RegisterFormPD = () => {
 
           <Input
             type="text"
-            name="businessName"
+            name="business_name"
             label="Razón social"
-            value={values.businessName}
+            value={values.business_name}
             onChange={handleChange}
           />
 
           <Input
             type="text"
-            name="productType"
+            name="prod_type"
             label="Tipos de producto (Manzana, pera, etc.)"
-            value={values.productType}
+            value={values.prod_type}
             onChange={handleChange}
           />
 

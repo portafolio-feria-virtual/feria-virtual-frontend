@@ -5,11 +5,12 @@ import * as Yup from 'yup';
 import { DefaultButton, Input, LoadingButton, Country } from '../../ui';
 
 import { IRegister } from '../../../interfaces/interfaces';
+import { registerController } from '../../../api/controllers/auth.controller';
 
 const RegisterFormCE = () => {
   const initialValues: IRegister = {
-    name: '',
-    lastname: '',
+    first_name: '',
+    last_name: '',
     username: '',
     email: '',
     address: '',
@@ -17,12 +18,13 @@ const RegisterFormCE = () => {
     country: '',
     password: '',
     confirmPassword: '',
+    tipo_usuario: '0',
     terms: false
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required('* Este campo es requerido.'),
-    lastname: Yup.string().required('* Este campo es requerido.'),
+    first_name: Yup.string().required('* Este campo es requerido.'),
+    last_name: Yup.string().required('* Este campo es requerido.'),
     username: Yup.string().required('* Este campo es requerido.'),
     email: Yup.string()
       .email('* Ingrese un correo válido')
@@ -42,7 +44,11 @@ const RegisterFormCE = () => {
 
   const onSubmit = (values: IRegister, actions: FormikHelpers<IRegister>) => {
     setTimeout(() => {
-      console.log(values);
+      const user = {
+        ...values,
+        tipo_usuario: '0'
+      };
+      registerController(user);
       actions.setSubmitting(false);
       actions.resetForm();
     }, 1500);
@@ -66,24 +72,24 @@ const RegisterFormCE = () => {
           <div className="grid gap-5 grid-cols-1 md:grid-cols-2">
             <Input
               type="text"
-              name="name"
+              name="first_name"
               label="Nombre *"
               placeholder="Jhon"
-              value={values.name}
-              touched={touched.name}
-              errors={errors.name}
+              value={values.first_name}
+              touched={touched.first_name}
+              errors={errors.first_name}
               onChange={handleChange}
               onBlur={handleBlur}
             />
 
             <Input
               type="text"
-              name="lastname"
+              name="last_name"
               label="Apellido *"
               placeholder="Doe"
-              value={values.lastname}
-              touched={touched.lastname}
-              errors={errors.lastname}
+              value={values.last_name}
+              touched={touched.last_name}
+              errors={errors.last_name}
               onChange={handleChange}
               onBlur={handleBlur}
             />
