@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 
 import { DefaultButton, Input, LoadingButton, Country } from '../../ui';
 
-import { IRegister } from '../../../interfaces/interfaces';
+import { IRegister, IUserRegister } from '../../../interfaces/interfaces';
 import { registerController } from '../../../api/controllers/auth.controller';
 
 const RegisterFormCE = () => {
@@ -42,15 +42,27 @@ const RegisterFormCE = () => {
     )
   });
 
-  const onSubmit = (values: IRegister, actions: FormikHelpers<IRegister>) => {
+  const onSubmit = (
+    values: IUserRegister,
+    actions: FormikHelpers<IRegister>
+  ) => {
     setTimeout(() => {
-      const user = {
-        ...values,
-        tipo_usuario: '0'
+      const user: IUserRegister = {
+        first_name: values.first_name,
+        last_name: values.last_name,
+        username: values.username,
+        email: values.email,
+        address: values.address,
+        phone: values.phone,
+        country: values.country,
+        password: values.password,
+        tipo_usuario: values.tipo_usuario
       };
+
       registerController(user);
+
       actions.setSubmitting(false);
-      actions.resetForm();
+      // actions.resetForm();
     }, 1500);
   };
 
