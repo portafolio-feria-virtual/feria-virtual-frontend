@@ -1,6 +1,7 @@
 import axios from 'axios';
 import http from '../config/http-common';
 import { ILogin, IRegister } from '../../interfaces/interfaces';
+import { toast } from 'react-hot-toast';
 
 export const register = async (user: IRegister) => {
   try {
@@ -10,8 +11,13 @@ export const register = async (user: IRegister) => {
       throw new Error('User not created');
     }
 
-    console.log('User created successfully');
-    return response;
+    if (response.status === 201) {
+      console.log(response);
+      toast.success('Usuario creado con éxito');
+      return response;
+    }
+
+    return;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error('[Axios Error]: ', error.message);
@@ -60,7 +66,7 @@ export const register = async (user: IRegister) => {
 };
 
 export const login = async (user: ILogin) => {
-  const response = await fetch('http://localhost:8000/api/auth/login/', {
+  const response = await fetch('http://127.0.0.1:8000/api/auth/login/', {
     method: 'POST',
     referrerPolicy: 'same-origin',
     credentials: 'include',
