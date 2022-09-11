@@ -11,10 +11,6 @@
     @apply antialiased m-0 font-montserrat font-medium bg-white text-base text-gray-600 leading-6 w-full min-h-screen min-w-[320px] scroll-smooth;
   }
 
-  #root {
-    @apply min-h-full
-  }
-
   h1,
   h2,
   h3,

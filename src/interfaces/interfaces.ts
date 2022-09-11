@@ -1,5 +1,5 @@
-export interface IUserRegister {
-  tipo_usuario?: string;
+export interface IUser {
+  tipo_usuario?: string | undefined;
   first_name?: string | undefined;
   last_name?: string | undefined;
   username?: string | undefined;
@@ -17,7 +17,7 @@ export interface IUserRegister {
   password?: string | undefined;
 }
 
-export interface IRegister extends IUserRegister {
+export interface IRegister extends IUser {
   confirmPassword?: string | undefined;
   terms?: boolean | undefined;
 }
@@ -25,4 +25,16 @@ export interface IRegister extends IUserRegister {
 export interface ILogin {
   email: string;
   password: string;
+}
+
+export interface IAuthState {
+  user: IUser | null;
+  error: string | null;
+}
+
+export enum UserTypes {
+  'CLIENTE_EXTERNO' = '0',
+  'CLIENTE_INTERNO' = '1',
+  'PRODUCTOR' = '2',
+  'TRANSPORTISTA' = '3'
 }

@@ -1,11 +1,15 @@
-import { IRegister } from '../../../interfaces/interfaces';
+import { IRegister, UserTypes, IUser } from '../../../interfaces/interfaces';
 import * as Yup from 'yup';
 import { FormikHelpers, Formik } from 'formik';
 import { DefaultButton, Input, LoadingButton } from '../../ui';
-import { Link } from 'react-router-dom';
-import { registerController } from '../../../api/controllers/auth.controller';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import { useUsers } from '../../../hooks/useUsers';
 
 const RegisterFormTa = () => {
+  const { register } = useUsers();
+  const navigate = useNavigate();
+
   const initialValues: IRegister = {
     first_name: '',
     last_name: '',
@@ -20,7 +24,7 @@ const RegisterFormTa = () => {
     cooling: false,
     password: '',
     confirmPassword: '',
-    tipo_usuario: '3',
+    tipo_usuario: UserTypes.TRANSPORTISTA,
     terms: false
   };
 
@@ -51,16 +55,38 @@ const RegisterFormTa = () => {
   });
 
   const onSubmit = (values: IRegister, actions: FormikHelpers<IRegister>) => {
-    setTimeout(() => {
-      const user = {
-        ...values,
-        tipo_usuario: '3'
-      };
+    const user: IUser = {
+      first_name: values.first_name,
+      last_name: values.last_name,
+      username: values.username,
+      phone: values.phone,
+      email: values.email,
+      address: values.address,
+      rut: values.rut,
+      doc_num: values.doc_num,
+      capacity: values.capacity,
+      size: values.size,
+      cooling: values.cooling,
+      password: values.password,
+      tipo_usuario: values.tipo_usuario
+    };
 
-      registerController(user);
-
+    setTimeout(async () => {
       actions.setSubmitting(false);
+
+      const response = await register(user);
+
+      if (response?.status !== 201) {
+        toast.error('El usuario ya existe.');
+        return;
+      }
+
+      toast.success('Usuario registrado con éxito.');
       actions.resetForm();
+
+      setTimeout(() => {
+        navigate('/ingreso', { replace: true });
+      }, 1000);
     }, 1500);
   };
 
