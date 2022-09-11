@@ -1,14 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
 import { Input, LoadingButton } from '../../ui';
 import { DefaultButton } from '../../ui/Buttons';
 
-import { IRegister } from '../../../interfaces/interfaces';
-import { registerController } from '../../../api/controllers/auth.controller';
+import { IRegister, IUser, UserTypes } from '../../../interfaces/interfaces';
+import { toast } from 'react-hot-toast';
+import { useUsers } from '../../../hooks/useUsers';
 
 const RegisterFormPD = () => {
+  const navigate = useNavigate();
+  const { register } = useUsers();
+
   const initialValues: IRegister = {
     first_name: '',
     last_name: '',
@@ -22,7 +26,7 @@ const RegisterFormPD = () => {
     prod_type: '',
     password: '',
     confirmPassword: '',
-    tipo_usuario: '2',
+    tipo_usuario: UserTypes.PRODUCTOR,
     terms: false
   };
 
@@ -40,6 +44,7 @@ const RegisterFormPD = () => {
       .matches(/^[0-9]+-[0-9kK]{1}$/, '* Ingrese un RUT válido.'),
     doc_num: Yup.string().required('* Este campo es requerido.'),
     business_name: Yup.string(),
+    prod_type: Yup.string(),
     password: Yup.string().required('* Este campo es requerido.'),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password'), null], '* Las contraseñas no coinciden.')
@@ -51,16 +56,37 @@ const RegisterFormPD = () => {
   });
 
   const onSubmit = (values: IRegister, actions: FormikHelpers<IRegister>) => {
-    setTimeout(() => {
-      const user = {
-        ...values,
-        tipo_usuario: '2'
-      };
+    const user: IUser = {
+      first_name: values.first_name,
+      last_name: values.last_name,
+      username: values.username,
+      phone: values.phone,
+      email: values.email,
+      address: values.address,
+      rut: values.rut,
+      doc_num: values.doc_num,
+      business_name: values.business_name,
+      prod_type: values.prod_type,
+      password: values.password,
+      tipo_usuario: values.tipo_usuario
+    };
 
-      registerController(user);
-
+    setTimeout(async () => {
       actions.setSubmitting(false);
+
+      const response = await register(user);
+
+      if (response?.status !== 201) {
+        toast.error('El usuario ya existe.');
+        return;
+      }
+
+      toast.success('Usuario registrado con éxito.');
       actions.resetForm();
+
+      setTimeout(() => {
+        navigate('/ingreso', { replace: true });
+      }, 1000);
     }, 1500);
   };
 

@@ -1,13 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
-import { DefaultButton, Input, LoadingButton, Country } from '../../ui';
+import { toast } from 'react-hot-toast';
 
-import { IRegister, IUserRegister } from '../../../interfaces/interfaces';
-import { registerController } from '../../../api/controllers/auth.controller';
+import { useUsers } from '../../../hooks/useUsers';
+
+import { DefaultButton, Input, LoadingButton, Country } from '../../ui';
+import { IRegister, IUser, UserTypes } from '../../../interfaces/interfaces';
 
 const RegisterFormCE = () => {
+  const { register } = useUsers();
+  const navigate = useNavigate();
+
   const initialValues: IRegister = {
     first_name: '',
     last_name: '',
@@ -18,7 +24,7 @@ const RegisterFormCE = () => {
     country: '',
     password: '',
     confirmPassword: '',
-    tipo_usuario: '0',
+    tipo_usuario: UserTypes.CLIENTE_EXTERNO,
     terms: false
   };
 
@@ -32,37 +38,48 @@ const RegisterFormCE = () => {
     address: Yup.string().required('* Este campo es requerido.'),
     phone: Yup.string().required('* Este campo es requerido.'),
     country: Yup.string().required('* Este campo es requerido.'),
-    password: Yup.string().required('* Este campo es requerido.'),
+    password: Yup.string()
+      .required('* Este campo es requerido.')
+      .min(8, '* La contraseña debe tener al menos 8 caracteres.'),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password'), null], '* Las contraseñas no coinciden.')
-      .required('* Este campo es requerido.'),
+      .required('* Este campo es requerido.')
+      .min(8, '* La contraseña debe tener al menos 8 caracteres.'),
     terms: Yup.boolean().oneOf(
       [true],
       '* Debe aceptar los términos y condiciones.'
     )
   });
 
-  const onSubmit = (
-    values: IUserRegister,
-    actions: FormikHelpers<IRegister>
-  ) => {
-    setTimeout(() => {
-      const user: IUserRegister = {
-        first_name: values.first_name,
-        last_name: values.last_name,
-        username: values.username,
-        email: values.email,
-        address: values.address,
-        phone: values.phone,
-        country: values.country,
-        password: values.password,
-        tipo_usuario: values.tipo_usuario
-      };
+  const onSubmit = (values: IUser, actions: FormikHelpers<IRegister>) => {
+    const user: IUser = {
+      first_name: values.first_name,
+      last_name: values.last_name,
+      username: values.username,
+      email: values.email,
+      address: values.address,
+      phone: values.phone,
+      country: values.country,
+      password: values.password,
+      tipo_usuario: values.tipo_usuario
+    };
 
-      registerController(user);
-
+    setTimeout(async () => {
       actions.setSubmitting(false);
-      // actions.resetForm();
+
+      const response = await register(user);
+
+      if (response?.status !== 201) {
+        toast.error('El usuario ya existe.');
+        return;
+      }
+
+      toast.success('Usuario registrado con éxito.');
+      actions.resetForm();
+
+      setTimeout(() => {
+        navigate('/ingreso', { replace: true });
+      }, 1000);
     }, 1500);
   };
 

@@ -1,13 +1,17 @@
 import { Formik, FormikHelpers } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import { loginController } from '../../api/controllers/auth.controller';
+import { useUsers } from '../../hooks/useUsers';
 
 import { ILogin } from '../../interfaces/interfaces';
 import { DefaultButton, LoadingButton } from '../ui';
 import { Input } from '../ui/Input';
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+
+  const { login } = useUsers();
+
   const initialValues: ILogin = {
     email: '',
     password: ''
@@ -21,11 +25,14 @@ const LoginForm = () => {
   });
 
   const onSubmit = (values: ILogin, actions: FormikHelpers<ILogin>) => {
-    setTimeout(() => {
-      console.log(values);
-      loginController(values);
+    setTimeout(async () => {
+      const response = await login(values);
+
+      if (response?.status === 200) {
+        navigate('/panel/usuario');
+      }
+
       actions.setSubmitting(false);
-      // actions.resetForm();
     }, 1500);
   };
 
