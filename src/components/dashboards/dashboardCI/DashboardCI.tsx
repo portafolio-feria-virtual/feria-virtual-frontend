@@ -1,6 +1,6 @@
 import { useUsers } from '../../../hooks/useUsers';
-import ProductCard from '../../ui/ProductCard';
-import SearchBar from '../../ui/SearchBar';
+import { ProductCard }  from '../../ui/ProductCard';
+import { SearchBar } from '../../ui/SearchBar';
 
 const DashboardCI = () => {
   const { logout, user } = useUsers();
