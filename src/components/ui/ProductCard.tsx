@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ProductCard() {
+export const ProductCard = (/* { title, price, img } */) => {
   return (
     
     <div className="w-full max-w-sm bg-white rounded-lg shadow-lg border">
