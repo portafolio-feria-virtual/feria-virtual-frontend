@@ -1,19 +1,22 @@
 import { useUsers } from '../../../hooks/useUsers';
+import SearchBar from '../../ui/SearchBar';
 
 const DashboardCI = () => {
   const { logout, user } = useUsers();
 
   return (
-    <div className="flex flex-col space-y-8 items-center justify-center h-screen">
-      <h1>PANEL CLIENTE INTERNO</h1>
+    <div className="">
 
-      <h3>{`Bienvenido ${user?.first_name} ${user?.last_name} < Cliente Interno >`}</h3>
+      <div>
+        <SearchBar/>
+      </div>
 
-      <pre>
-        <code>{JSON.stringify(user, null, 2)}</code>
-      </pre>
+      <h2>Recomendados</h2>
 
-      <button onClick={() => logout()}>SALIR</button>
+      <div>
+        
+      </div>
+
     </div>
   );
 };
