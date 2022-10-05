@@ -1,6 +1,11 @@
 import { useUsers } from '../../../hooks/useUsers';
-import { ProductCard }  from '../../ui/ProductCard';
-import { SearchBar } from '../../ui/SearchBar';
+import { ExtendedCard } from '../../marketplace/ExtendedCard';
+import { Filters } from '../../marketplace/Filters';
+import { FullCard } from '../../marketplace/FullCard';
+import { ProductCard }  from '../../marketplace/ProductCard';
+import { ProductDetail } from '../../marketplace/ProductDetail';
+import { SearchBar } from '../../marketplace/SearchBar';
+import { SellerDetail } from '../../marketplace/SellerDetail';
 
 const DashboardCI = () => {
   const { logout, user } = useUsers();
@@ -20,6 +25,21 @@ const DashboardCI = () => {
         <ProductCard />
         <ProductCard />
         <ProductCard />
+      </div>
+
+      <div className="mx-20 my-10 grid gap-10 grid-cols-2">
+        <div>
+          <ExtendedCard />
+          <ExtendedCard />
+          <ExtendedCard />
+        </div>
+        <Filters />
+      </div>
+
+      <div className="mx-20 my-10">
+        <FullCard />
+        <ProductDetail />
+        <SellerDetail />
       </div>
 
     </div>

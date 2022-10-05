@@ -1,4 +1,4 @@
-import React from 'react'
+// Barra de busqueda de productos
 
 export const SearchBar = () => {
   return (
