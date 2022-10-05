@@ -5,7 +5,7 @@ import DashboardCE from './dashboardCE/DashboardCE';
 import DashboardCI from './dashboardCI/DashboardCI';
 import DashboardPD from './dashboardPD/DashboardPD';
 import DashboardTA from './dashboardTA/DashboardTA';
-
+import { DashboardAdmin } from './dashboardAdmin/DashboardAdmin';
 const Dashboard = () => {
   const { user, isAuth } = useUsers();
   //  switch (user?.tipo_usuario) {
@@ -27,14 +27,16 @@ const Dashboard = () => {
 
   return (
     <>
-      {isAuth && (
+      {
+        <DashboardAdmin/>
+      /* {isAuth && (
         <>
           {user?.tipo_usuario === '0' && <DashboardCE />}
           {user?.tipo_usuario === '1' && <DashboardCI />}
           {user?.tipo_usuario === '2' && <DashboardPD />}
           {user?.tipo_usuario === '3' && <DashboardTA />}
         </>
-      )}
+      )} */}
     </>
   );
 };

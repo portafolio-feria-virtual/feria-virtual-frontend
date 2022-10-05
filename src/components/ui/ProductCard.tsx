@@ -8,8 +8,10 @@ export const ProductCard = (/* { title, price, img } */) => {
         <div className="px-5 pb-5 ">
             <h5 className="text-xl font-semibold tracking-tight text-gray-900">Naranjas por kilo</h5>
             <span className="text-3xl font-bold text-gray-900">$3.000</span>
+            
         </div>
     </div>
 
   )
 }
+//Hola
