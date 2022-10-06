@@ -1,11 +1,5 @@
 import { useUsers } from '../../../hooks/useUsers';
-import { ExtendedCard } from '../../marketplace/ExtendedCard';
-import { Filters } from '../../marketplace/Filters';
-import { FullCard } from '../../marketplace/FullCard';
-import { ProductCard }  from '../../marketplace/ProductCard';
-import { ProductDetail } from '../../marketplace/ProductDetail';
-import { SearchBar } from '../../marketplace/SearchBar';
-import { SellerDetail } from '../../marketplace/SellerDetail';
+import { ExtendedCard, Filters, FullCard, ProductCard, ProductDetail, SearchBar, SellerDetail } from '../../marketplace';
 
 const DashboardCI = () => {
   const { logout, user } = useUsers();
