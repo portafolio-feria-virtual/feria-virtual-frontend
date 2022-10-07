@@ -1,4 +1,4 @@
-export interface IMarketplaceProps {
+export interface IMarketplace {
     productData: {
       title: string;
       price: number;
@@ -6,3 +6,11 @@ export interface IMarketplaceProps {
       stock: number;
     }
   }
+
+export interface IProductDetails {
+
+  }
+
+export interface SellerDetail {
+  
+}

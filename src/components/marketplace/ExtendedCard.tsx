@@ -1,8 +1,8 @@
 // Tarjeta al realizar busqueda de producto
-import { IMarketplaceProps } from '../../interfaces/marketplaceinterfaces'
+import { IMarketplace } from '../../interfaces/Marketplace.interfaces'
 
 
-export const ExtendedCard = ( props: IMarketplaceProps ) => {
+export const ExtendedCard = ( props: IMarketplace ) => {
   const {title, price, img} = props.productData;
 
   return (

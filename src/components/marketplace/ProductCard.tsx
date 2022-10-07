@@ -1,7 +1,7 @@
 // Tarjeta al iniciar sesion y ver recomendados
-import { IMarketplaceProps } from '../../interfaces/marketplaceinterfaces'
+import { IMarketplace } from '../../interfaces/Marketplace.interfaces'
 
-export const ProductCard = (props: IMarketplaceProps) => {
+export const ProductCard = (props: IMarketplace) => {
   const {title, price, img} = props.productData;
 
   return (
