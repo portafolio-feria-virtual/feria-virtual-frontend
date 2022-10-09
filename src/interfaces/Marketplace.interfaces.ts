@@ -1,4 +1,4 @@
-export interface IMarketplace {
+export interface IProductData {
     productData: {
       title: string;
       price: number;

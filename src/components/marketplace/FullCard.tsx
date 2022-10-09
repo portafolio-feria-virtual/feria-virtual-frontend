@@ -1,8 +1,7 @@
 // Tarjeta al ver el detalle del producto y querer comprarlo
-import { IMarketplace } from '../../interfaces/Marketplace.interfaces'
+import { IProductData } from '../../interfaces/Marketplace.interfaces'
 
-export const FullCard = ( props:IMarketplace ) => {
-  const {title, price, img, stock} = props.productData;
+export const FullCard = ( { productData: {title, price, img, stock} }:IProductData ) => {
 
   return (
     <div>
