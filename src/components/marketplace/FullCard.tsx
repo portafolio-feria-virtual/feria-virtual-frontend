@@ -6,7 +6,7 @@ export const FullCard = ({ title, price, img, stock }: IProductData) => {
     <div>
       <div className="flex flex-row items-center justify-center bg-white rounded-sm border shadow-md gap-16">
         <img
-          className="object-cover m-2 w-96 h-auto rounded-lg"
+          className="object-cover m-2 w-96 h-96 rounded-lg"
           src={img}
           alt="Product image"
         />
