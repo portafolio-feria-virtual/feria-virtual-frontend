@@ -16,7 +16,6 @@ const ContractForm = () => {
         />
       </div>
 
-
       <div date-rangepicker className="flex items-center pl-5">
         <div className="relative mt-3">
           <Input
@@ -36,9 +35,6 @@ const ContractForm = () => {
             placeholder="f"
           />
         </div>
-        {
-          //
-        }
       </div>
       <div className="pl-5">
         <Input type="file" name="file" label="Subir pdf" placeholder="file" />
@@ -50,6 +46,5 @@ const ContractForm = () => {
     </div>
   );
 };
-//mt-12 bg-green-600 rounded-r-lg border
 
 export default ContractForm;
