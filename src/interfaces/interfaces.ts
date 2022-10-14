@@ -33,8 +33,10 @@ export interface IAuthState {
 }
 
 export enum UserTypes {
-  'CLIENTE_EXTERNO' = 'Externo',
-  'CLIENTE_INTERNO' = 'Interno',
+  'CLIENTE_EXTRANJERO' = 'Extranjero',
+  'CLIENTE_LOCAL' = 'Local',
   'PRODUCTOR' = 'Productor',
-  'TRANSPORTISTA' = 'Transportista'
+  'TRANSPORTISTA' = 'Transportista',
+  'ADMIN' = 'Administrador',
+  'CONSULTOR' = 'Consultor',
 }
