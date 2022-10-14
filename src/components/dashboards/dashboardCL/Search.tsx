@@ -106,7 +106,7 @@ export const Search = () => {
                 Seleccione una ubicación
               </option>
               {ubicaciones.map(ubic => (
-                <option value={ubic.name}>{ubic.name}</option>
+                <option key={ubic.id} value={ubic.name}>{ubic.name}</option>
               ))}
             </select>
           </div>

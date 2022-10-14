@@ -1,10 +1,10 @@
-import RegisterFormCI from './RegisterFormCI';
+import RegisterFormCI from './RegisterFormCL';
 
 export const RegisterCI = () => {
   return (
     <>
       <h4 className="mb-10">
-        Registrarse como <strong>Cliente Interno</strong>
+        Registrarse como <strong>Cliente Local</strong>
       </h4>
 
       <RegisterFormCI />

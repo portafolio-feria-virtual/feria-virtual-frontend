@@ -39,7 +39,7 @@ const data: IProductData[] = [
 const DashboardCI = () => {
   const { logout, user } = useUsers();
 
-  let [filterText, updateFilterText] = useState('all');
+  const [filterText, updateFilterText] = useState('all');
 
   function onFilterSelected(filterValue: any) {
     updateFilterText(filterValue);
@@ -53,16 +53,14 @@ const DashboardCI = () => {
         <SearchBar />
       </div>
 
-      
       <h2>Recomendados</h2>
-      
 
       <div className="mx-20 my-10 grid gap-5 grid-cols-1 md:grid-cols-5">
         {data.map(product => (
           <ProductCard key={product.id} {...product} />
         ))}
       </div>
-      
+
       <div className="mx-20 my-10 grid gap-10 grid-cols-2">
         <div>
           {filterText === 'all'
@@ -76,13 +74,11 @@ const DashboardCI = () => {
         <Filters filterSelected={onFilterSelected} />
       </div>
 
-      
       <div className="mx-20 my-10">
         {data.map(product => (
           <FullCard key={product.id} {...product} />
         ))}
-      </div> 
-      
+      </div>
     </div>
   );
 };

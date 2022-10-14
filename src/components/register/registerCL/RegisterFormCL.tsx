@@ -28,7 +28,7 @@ const RegisterFormCI = () => {
     business_name: '',
     password: '',
     confirmPassword: '',
-    tipo_usuario: UserTypes.CLIENTE_INTERNO,
+    tipo_usuario: UserTypes.CLIENTE_LOCAL,
     terms: false
   };
 

@@ -1,8 +1,8 @@
 import { NavLink } from '../ui/';
 
 export const registerItems = [
-  { id: 1, name: 'Cliente Externo', path: 'cliente-externo' },
-  { id: 2, name: 'Cliente Interno', path: 'cliente-interno' },
+  { id: 1, name: 'Cliente Extrajero', path: 'cliente-extrajero' },
+  { id: 2, name: 'Cliente Local', path: 'cliente-local' },
   { id: 3, name: 'Productor', path: 'productor' },
   { id: 4, name: 'Transportista', path: 'transportista' }
 ];

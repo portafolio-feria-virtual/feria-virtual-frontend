@@ -24,7 +24,7 @@ const RegisterFormCE = () => {
     country: '',
     password: '',
     confirmPassword: '',
-    tipo_usuario: UserTypes.CLIENTE_EXTERNO,
+    tipo_usuario: UserTypes.CLIENTE_EXTRANJERO,
     terms: false
   };
 
