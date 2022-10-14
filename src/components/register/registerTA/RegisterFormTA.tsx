@@ -1,4 +1,4 @@
-import { IRegister, UserTypes, IUser } from '../../../interfaces/interfaces';
+import { IRegister, UserTypes, IUser } from '../../../interfaces';
 import * as Yup from 'yup';
 import { FormikHelpers, Formik } from 'formik';
 import { DefaultButton, Input, LoadingButton } from '../../ui';

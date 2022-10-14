@@ -1,4 +1,4 @@
-import { IProductData } from '../../../interfaces/marketplace.interface';
+import { IProductData } from '../../../interfaces';
 import { FullCard } from '../../marketplace/FullCard';
 import { SearchBar } from '../../marketplace/SearchBar';
 

@@ -8,7 +8,7 @@ import { toast } from 'react-hot-toast';
 import { useUsers } from '../../../hooks/useUsers';
 
 import { DefaultButton, Input, LoadingButton, Country } from '../../ui';
-import { IRegister, IUser, UserTypes } from '../../../interfaces/interfaces';
+import { IRegister, IUser, UserTypes } from '../../../interfaces';
 
 const RegisterFormCE = () => {
   const { register } = useUsers();

@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { Input, LoadingButton } from '../../ui';
 import { DefaultButton } from '../../ui/Buttons';
 
-import { IRegister, IUser, UserTypes } from '../../../interfaces/interfaces';
+import { IRegister, IUser, UserTypes } from '../../../interfaces';
 import { toast } from 'react-hot-toast';
 import { useUsers } from '../../../hooks/useUsers';
 

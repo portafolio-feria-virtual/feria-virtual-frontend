@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IAuthState, ILogin, IUser } from '../../interfaces/interfaces';
+import { IAuthState, ILogin, IUser } from '../../interfaces/auth.interface';
 import { authContext } from '../authContext';
 import { useReducer, useState, useEffect } from 'react';
 import { authReducer } from '../reducers/authReducer';

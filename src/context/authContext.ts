@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import { AxiosResponse } from 'axios';
 import { createContext, useContext } from 'react';
-import { IUser, ILogin, IAuthState } from '../interfaces/interfaces';
+import { IUser, ILogin, IAuthState } from '../interfaces/auth.interface';
 
 interface IAuthContext {
   authState: IAuthState;

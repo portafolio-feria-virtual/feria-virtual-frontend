@@ -10,7 +10,7 @@ import { useUsers } from '../../../hooks/useUsers';
 import { DefaultButton, LoadingButton } from '../../ui';
 import { Input } from '../../ui/Input';
 
-import { IRegister, IUser, UserTypes } from '../../../interfaces/interfaces';
+import { IRegister, IUser, UserTypes } from '../../../interfaces';
 
 const RegisterFormCI = () => {
   const { register } = useUsers();

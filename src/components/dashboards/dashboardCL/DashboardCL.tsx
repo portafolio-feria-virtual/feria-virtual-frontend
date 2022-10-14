@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useUsers } from '../../../hooks/useUsers';
-import { IProductData } from '../../../interfaces/marketplace.interface';
+import { IProductData } from '../../../interfaces';
 import {
   ExtendedCard,
   Filters,

@@ -16,7 +16,7 @@ const ContractForm = () => {
         />
       </div>
 
-      <div date-rangepicker className="flex items-center pl-5">
+      <div className="flex items-center pl-5">
         <div className="relative mt-3">
           <Input
             type="date"

@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
-import {
-  IProductData,
-  IUbicaciones
-} from '../../../interfaces/marketplace.interface';
+import { IProductData, IUbicaciones } from '../../../interfaces';
 import { ExtendedCard } from '../../marketplace/ExtendedCard';
 import { Filters } from '../../marketplace/Filters';
 import { SearchBar } from '../../marketplace/SearchBar';
@@ -64,13 +61,15 @@ export const Search = () => {
     maxPrice: 999999999
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const {name, value} = e.target;
-    setFilter({...filter, [name]: value});
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFilter({ ...filter, [name]: value });
+  };
 
   const clearFilters = () => {
-    setFilter({ubication: '', minPrice: 0, maxPrice: 999999999})
+    setFilter({ ubication: '', minPrice: 0, maxPrice: 999999999 });
   };
 
   // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -88,8 +87,7 @@ export const Search = () => {
             .map(product => <ExtendedCard key={product.id} {...product} />)
             .filter(product => product.props.ubication.includes(ubication))
             .filter(product => product.props.price >= filter.minPrice)
-            .filter(product => product.props.price <= filter.maxPrice)
-            }
+            .filter(product => product.props.price <= filter.maxPrice)}
         </div>
         <div className="">
           <h2>Filtros</h2>
@@ -106,7 +104,9 @@ export const Search = () => {
                 Seleccione una ubicación
               </option>
               {ubicaciones.map(ubic => (
-                <option key={ubic.id} value={ubic.name}>{ubic.name}</option>
+                <option key={ubic.id} value={ubic.name}>
+                  {ubic.name}
+                </option>
               ))}
             </select>
           </div>
@@ -144,7 +144,8 @@ export const Search = () => {
           </div>
           <div>
             <button
-              className="rounded-lg bg-gray-500 text-white pl-2 pr-2" onClick={clearFilters}>
+              className="rounded-lg bg-gray-500 text-white pl-2 pr-2"
+              onClick={clearFilters}>
               Limpiar Filtros
             </button>
           </div>

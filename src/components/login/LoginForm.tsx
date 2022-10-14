@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useUsers } from '../../hooks/useUsers';
 
-import { ILogin } from '../../interfaces/interfaces';
+import { ILogin } from '../../interfaces';
 import { DefaultButton, LoadingButton } from '../ui';
 import { Input } from '../ui/Input';
 
