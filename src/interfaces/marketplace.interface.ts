@@ -7,6 +7,11 @@ export interface IProductData {
   ubication: string;
 }
 
+export interface IUbicaciones {
+  id: string;
+  name: string;
+}
+
 //export interface IProductDetails {}
 
 //export interface ISellerDetail {}
