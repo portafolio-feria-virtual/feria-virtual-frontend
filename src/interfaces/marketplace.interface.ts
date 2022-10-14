@@ -4,6 +4,12 @@ export interface IProductData {
   price: number;
   img: string;
   stock: number;
+  ubication: string;
+}
+
+export interface IUbicaciones {
+  id: string;
+  name: string;
 }
 
 //export interface IProductDetails {}

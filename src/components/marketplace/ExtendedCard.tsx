@@ -6,7 +6,7 @@ export const ExtendedCard = ({ title, price, img }: IProductData) => {
     <div>
       <div className="flex flex-row items-center bg-white rounded-sm border shadow-md">
         <img
-          className="object-cover m-2 w-48 h-auto rounded-lg"
+          className="object-cover m-2 w-48 h-36 rounded-lg"
           src={img}
           alt="Product image"
         />
