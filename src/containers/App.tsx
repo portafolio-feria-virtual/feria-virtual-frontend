@@ -30,9 +30,9 @@ const App = () => {
           <Route path="/registro" element={<RegisterPage />}>
             <Route
               path="/registro"
-              element={<Navigate to="cliente-extrajero" replace />}
+              element={<Navigate to="cliente-extranjero" replace />}
             />
-            <Route path="cliente-extrajero" element={<RegisterCE />} />
+            <Route path="cliente-extranjero" element={<RegisterCE />} />
             <Route path="cliente-local" element={<RegisterCI />} />
             <Route path="productor" element={<RegisterPD />} />
             <Route path="transportista" element={<RegisterTA />} />

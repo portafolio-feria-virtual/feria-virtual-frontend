@@ -52,7 +52,7 @@ const Navbar = () => {
               id="login-button"
               className="hidden lg:block pb-2 lg:pb-0 pl-2 lg:pl-0">
               <Link
-                to="/registro/cliente-extrajero"
+                to="/registro/cliente-extranjero"
                 className="text-green-500 hover:text-green-700 font-medium">
                 Registrarme
               </Link>
