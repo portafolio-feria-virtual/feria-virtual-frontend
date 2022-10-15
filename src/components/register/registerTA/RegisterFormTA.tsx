@@ -209,7 +209,7 @@ const RegisterFormTa = () => {
             <Input
               type="text"
               name="size"
-              label="Dimensión Transporte (m2)"
+              label="Dimensión Transporte (m3)"
               value={values.size}
               onChange={handleChange}
             />
