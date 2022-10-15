@@ -48,7 +48,7 @@ const DashboardCI = () => {
   console.log(filterText);
 
   return (
-    <div className="">
+    <div>
       <div className="my-10">
         <SearchBar />
       </div>
@@ -58,25 +58,6 @@ const DashboardCI = () => {
       <div className="mx-20 my-10 grid gap-5 grid-cols-1 md:grid-cols-5">
         {data.map(product => (
           <ProductCard key={product.id} {...product} />
-        ))}
-      </div>
-
-      <div className="mx-20 my-10 grid gap-10 grid-cols-2">
-        <div>
-          {filterText === 'all'
-            ? data.map(product => (
-                <ExtendedCard key={product.id} {...product} />
-              ))
-            : data
-                .map(product => <ExtendedCard key={product.id} {...product} />)
-                .filter(ubication => ubication.props.ubication === filterText)}
-        </div>
-        <Filters filterSelected={onFilterSelected} />
-      </div>
-
-      <div className="mx-20 my-10">
-        {data.map(product => (
-          <FullCard key={product.id} {...product} />
         ))}
       </div>
     </div>
