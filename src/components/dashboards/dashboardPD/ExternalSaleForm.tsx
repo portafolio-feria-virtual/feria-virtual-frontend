@@ -1,14 +1,14 @@
-import { IContract } from '../../../interfaces';
-import { DefaultButton, Input, LoadingButton } from '../../ui';
-import * as Yup from 'yup';
 import { Formik, FormikHelpers } from 'formik';
-import { IExternalSale } from '../../../interfaces/externalsale.interface';
+import * as Yup from 'yup';
+import { DefaultButton, Input, LoadingButton } from '../../ui';
+import { IExternalSale } from '../../../interfaces';
 
 const ExternalSaleForm = () => {
   const initialValues: IExternalSale = {
+    id: '',
     offerName: '',
-    descriptionOffer: '',
-    fileOffer: '',
+    offerDescription: '',
+    offerFile: '',
     offerValue: 0
   };
   const validationSchema = Yup.object({
@@ -18,7 +18,10 @@ const ExternalSaleForm = () => {
     fileName: Yup.string().required('* Este campo es requerido.')
   });
 
-  const onSubmit = (values: IExternalSale, actions: FormikHelpers<IExternalSale>) => {
+  const onSubmit = (
+    values: IExternalSale,
+    actions: FormikHelpers<IExternalSale>
+  ) => {
     actions.setSubmitting(false);
     console.log(values);
   };
@@ -58,38 +61,36 @@ const ExternalSaleForm = () => {
               />
             </div>
 
-            
-              <div className="relative mt-3  block p-4 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <Input
-                  type="message"
-                  name="descriptionOffer"
-                  label="Descripcion de oferta"
-                  placeholder="Oferta por dos unidades"
-                  required
-                  value={values.descriptionOffer}
-                  touched={touched.descriptionOffer}
-                  errors={errors.descriptionOffer}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-              </div>
-            
+            <div className="relative mt-3  block p-4 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <Input
+                type="message"
+                name="descriptionOffer"
+                label="Descripcion de oferta"
+                placeholder="Oferta por dos unidades"
+                required
+                value={values.offerDescription}
+                touched={touched.offerDescription}
+                errors={errors.offerDescription}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
 
-              <div className="relative mt-3">
-                <Input
-                  type="text"
-                  name="offerValue"
-                  label="Valor de oferta"
-                  placeholder="00000"
-                  required
-                  value={values.offerValue}
-                  touched={touched.offerValue}
-                  errors={errors.offerValue}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-              </div>
-            
+            <div className="relative mt-3">
+              <Input
+                type="text"
+                name="offerValue"
+                label="Valor de oferta"
+                placeholder="00000"
+                required
+                value={values.offerValue}
+                touched={touched.offerValue}
+                errors={errors.offerValue}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+
             <div className="pl-5">
               <Input
                 type="file"
@@ -97,13 +98,12 @@ const ExternalSaleForm = () => {
                 label="Subir pdf oferta"
                 placeholder="file"
                 required
-                value={values.fileOffer}
-                touched={touched.fileOffer}
-                errors={errors.fileOffer}
+                value={values.offerFile}
+                touched={touched.offerFile}
+                errors={errors.offerFile}
                 onChange={handleChange}
                 onBlur={handleBlur}
-              />{' '}
-              {/*agregar filtrado pdf*/}
+              />
             </div>
 
             <div className=" mt-12 flex items-center justify-center bg-green-500 hover:bg-green-700 w-fit text-white font-semibold py-1 px-4 rounded-md focus:outline-none focus:shadow-outline">

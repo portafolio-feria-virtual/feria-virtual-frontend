@@ -1,4 +1,3 @@
-// Tarjeta al iniciar sesion y ver recomendados
 import { IProductData } from '../../interfaces';
 
 export const ProductCard = ({ title, price, img }: IProductData) => {

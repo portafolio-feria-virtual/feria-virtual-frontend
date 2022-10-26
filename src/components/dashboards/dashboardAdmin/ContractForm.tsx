@@ -5,7 +5,7 @@ import { Formik, FormikHelpers } from 'formik';
 
 const ContractForm = () => {
   const initialValues: IContract = {
-    idContract: '',
+    id: '',
     companyName: '',
     endDate: '',
     initDate: '',
@@ -25,9 +25,7 @@ const ContractForm = () => {
 
   return (
     <div className="flex flex-col items-center ">
-      <h2 className="pl-20 text-green-600">
-        ¡Bienvenido a la creacion de contratos!
-      </h2>
+      <h2 className="pl-20 text-green-600">Creación de Contratos</h2>
 
       <Formik
         initialValues={initialValues}
@@ -49,12 +47,12 @@ const ContractForm = () => {
                 name="companyName"
                 label="Empresa de contrato"
                 placeholder="Empresa"
-                required
                 value={values.companyName}
                 touched={touched.companyName}
                 errors={errors.companyName}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                required
               />
             </div>
 
@@ -64,13 +62,12 @@ const ContractForm = () => {
                   type="date"
                   name="initDate"
                   label="Fecha Inicio"
-                  placeholder="f"
-                  required
                   value={values.initDate}
                   touched={touched.initDate}
                   errors={errors.initDate}
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  required
                 />
               </div>
               <span className="mx-4 text-gray-500 mt-10">--</span>
@@ -96,14 +93,13 @@ const ContractForm = () => {
                 name="fileName"
                 label="Subir pdf"
                 placeholder="file"
-                required
                 value={values.fileName}
                 touched={touched.fileName}
                 errors={errors.fileName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-              />{' '}
-              {/*agregar filtrado pdf*/}
+                required
+              />
             </div>
 
             <div className=" mt-12 flex items-center justify-center bg-green-500 hover:bg-green-700 w-fit text-white font-semibold py-1 px-4 rounded-md focus:outline-none focus:shadow-outline">

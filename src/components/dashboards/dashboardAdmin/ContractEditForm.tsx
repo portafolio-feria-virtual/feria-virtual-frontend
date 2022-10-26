@@ -5,7 +5,7 @@ import { Formik, FormikHelpers } from 'formik';
 
 const ContractEditForm = (/*{companyName,initDate,endDate,fileName}*/) => {
   const initialValues: IContract = {
-    idContract: '',
+    id: '',
     companyName: '',
     endDate: '',
     initDate: '',
@@ -24,7 +24,7 @@ const ContractEditForm = (/*{companyName,initDate,endDate,fileName}*/) => {
   };
   return (
     <div className="flex flex-col items-center ">
-      <h2 className=" text-green-600">Edicion de contratos</h2>
+      <h2 className=" text-green-600">Modificación de contratos</h2>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -33,7 +33,6 @@ const ContractEditForm = (/*{companyName,initDate,endDate,fileName}*/) => {
           values,
           touched,
           errors,
-          isSubmitting,
           handleChange,
           handleBlur,
           handleSubmit
@@ -44,7 +43,11 @@ const ContractEditForm = (/*{companyName,initDate,endDate,fileName}*/) => {
                 type="text"
                 name="companyName"
                 label="Empresa de contrato"
-                value="Empresa" //agregar variable nombre empresa
+                value={values.companyName}
+                touched={touched.companyName}
+                errors={errors.companyName}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 disabled
               />
             </div>
@@ -55,7 +58,11 @@ const ContractEditForm = (/*{companyName,initDate,endDate,fileName}*/) => {
                   type="date"
                   name="initDate"
                   label="Fecha Inicio"
-                  value="variable" //agregar variable del valor fecha inicio
+                  value={values.initDate}
+                  touched={touched.initDate}
+                  errors={errors.initDate}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                   disabled
                 />
               </div>
@@ -66,7 +73,11 @@ const ContractEditForm = (/*{companyName,initDate,endDate,fileName}*/) => {
                   type="date"
                   name="endDate"
                   label="Fecha Termino"
-                  value="f" //agregar variable de fecha termino
+                  value={values.endDate}
+                  touched={touched.endDate}
+                  errors={errors.endDate}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                   required
                 />
               </div>
@@ -77,6 +88,11 @@ const ContractEditForm = (/*{companyName,initDate,endDate,fileName}*/) => {
                 name="fileName"
                 label="Subir pdf"
                 placeholder="file"
+                value={values.fileName}
+                touched={touched.fileName}
+                errors={errors.fileName}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 required
               />
             </div>
@@ -84,7 +100,7 @@ const ContractEditForm = (/*{companyName,initDate,endDate,fileName}*/) => {
             <div className=" mt-12 flex items-center justify-center bg-green-500 hover:bg-green-700 w-fit text-white font-semibold py-1 px-4 rounded-md focus:outline-none focus:shadow-outline">
               <DefaultButton text="Guardar cambios" type="submit" />
             </div>
-            <div className=" mt-12 flex items-center justify-center bg-green-500 hover:bg-green-700 w-fit text-white font-semibold py-1 px-4 rounded-md focus:outline-none focus:shadow-outline">
+            <div className=" mt-12 flex items-center justify-center bg-red-500 hover:bg-red-700 w-fit text-white font-semibold py-1 px-4 rounded-md focus:outline-none focus:shadow-outline">
               <DefaultButton text="Cancelar" type="submit" />
             </div>
           </form>

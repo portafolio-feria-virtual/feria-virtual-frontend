@@ -1,5 +1,3 @@
-//Filtros para busqueda de productos
-
 import { IoIosArrowForward } from 'react-icons/io';
 
 export const Filters = (props: any) => {

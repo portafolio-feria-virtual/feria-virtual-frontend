@@ -1,18 +1,23 @@
-import { useState } from "react";
-import {DefaultButton, LoadingButton} from '../../ui';
+import { useState } from 'react';
+import { DefaultButton } from '../../ui';
 
-export const SaleProcessConfirmation = ({children}:any) => {
-  const [showModal, setShowModal] = useState(false)
+type Props = {
+  children: JSX.Element | JSX.Element[];
+};
+
+export const SaleProcessConfirmation = ({ children }: Props) => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <>
-     <div className=" mt-12 flex items-center justify-center bg-green-500 hover:bg-green-700 w-fit text-white font-semibold py-1 px-4 rounded-md focus:outline-none focus:shadow-outline">
-     <DefaultButton        
-        type="button"
-        text="Confirmar Datos"
-        onClick={() => setShowModal(true)}
-      />
-     </div>
-      
+      <div className=" mt-12 flex items-center justify-center bg-green-500 hover:bg-green-700 w-fit text-white font-semibold py-1 px-4 rounded-md focus:outline-none focus:shadow-outline">
+        <DefaultButton
+          type="button"
+          text="Confirmar Datos"
+          onClick={() => setShowModal(true)}
+        />
+      </div>
+
       {showModal ? (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -26,9 +31,7 @@ export const SaleProcessConfirmation = ({children}:any) => {
                   </h3>
                 </div>
                 {/*body*/}
-                <div className="relative p-6 flex-auto">
-                  {children}
-                </div>
+                <div className="relative p-6 flex-auto">{children}</div>
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                   <DefaultButton
@@ -36,8 +39,8 @@ export const SaleProcessConfirmation = ({children}:any) => {
                     type="button"
                     text="Cerrar"
                     onClick={() => setShowModal(false)}
-                  />                  
-                  <DefaultButton text="Aceptar confirmacion" type="submit"/>
+                  />
+                  <DefaultButton text="Aceptar confirmacion" type="submit" />
                 </div>
               </div>
             </div>
@@ -46,5 +49,5 @@ export const SaleProcessConfirmation = ({children}:any) => {
         </>
       ) : null}
     </>
-  )
-}
+  );
+};
