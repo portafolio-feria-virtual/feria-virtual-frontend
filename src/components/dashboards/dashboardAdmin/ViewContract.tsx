@@ -10,14 +10,14 @@ const data: IContract[] = [
   {
     idContract: 'AABB00',
     companyName: 'Ariztia',
-    startDate: '26/10/2021',
+    initDate: '26/10/2021',
     modifyDate: '27/11/2021',
     endDate: '25/12/2021'
   },
   {
     idContract: 'BBAA00',
     companyName: 'Santa Isabel',
-    startDate: '27/10/2021',
+    initDate: '27/10/2021',
     modifyDate: '28/11/2021',
     endDate: '26/12/2021'
   }

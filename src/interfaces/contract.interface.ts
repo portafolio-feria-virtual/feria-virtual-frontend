@@ -1,7 +1,11 @@
+
 export interface IContract{
     idContract:string,
     companyName:string,
-    startDate: string,
+    initDate: string,
     modifyDate?: string,
-    endDate: string
+    endDate: string,
+    fileName?: string
 }
+
+

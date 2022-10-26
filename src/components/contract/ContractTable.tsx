@@ -4,7 +4,7 @@ import { IContract } from '../../interfaces/contract.interface';
 export const ContractTable = ({
   idContract,
   companyName,
-  startDate,
+  initDate,
   modifyDate,
   endDate
 }: IContract) => {
@@ -14,7 +14,7 @@ export const ContractTable = ({
     <tr key={idContract} className="border">
       <td className="py-4 px-6 border">{idContract}</td>
       <td className="py-4 px-6 border">{companyName}</td>
-      <td className="py-4 px-6 border">{startDate}</td>
+      <td className="py-4 px-6 border">{initDate}</td>
       <td className="py-4 px-6 border">{modifyDate}</td>
       <td className="py-4 px-6 border">{endDate}</td>
       <td className="flex flex-col py-4 px-6 ">
