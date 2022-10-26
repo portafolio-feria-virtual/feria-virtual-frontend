@@ -7,7 +7,7 @@ export interface IProductData {
   ubication: string;
 }
 
-export interface IUbicaciones {
+export interface IUbications {
   id: string;
   name: string;
 }

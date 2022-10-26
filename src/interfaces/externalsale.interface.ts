@@ -1,7 +1,7 @@
 export interface IExternalSale {
-    idSale?: string;
-    offerName: string;
-    descriptionOffer: string;
-    fileOffer: string;
-    offerValue: number;
-  }
+  id: string;
+  offerName: string;
+  offerDescription: string;
+  offerFile: string;
+  offerValue: number;
+}
