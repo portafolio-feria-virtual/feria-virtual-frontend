@@ -42,9 +42,9 @@ const App = () => {
         </Route>
 
         <Route element={<ProtectedRoute />}>
-          <Route path="/panel/usuario" element={<Dashboard />} />
+          
         </Route>
-
+        <Route path="/panel/usuario" element={<Dashboard />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
     </AuthProvider>

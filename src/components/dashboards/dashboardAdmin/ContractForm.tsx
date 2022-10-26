@@ -5,6 +5,7 @@ import { Formik, FormikHelpers } from 'formik';
 
 const ContractForm = () => {
   const initialValues: IContract = {
+    idContract: '',
     companyName: '',
     endDate: '',
     initDate: '',
