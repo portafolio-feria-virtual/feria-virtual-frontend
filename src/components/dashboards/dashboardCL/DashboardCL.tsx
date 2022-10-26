@@ -1,13 +1,5 @@
-import { useState } from 'react';
-import { useUsers } from '../../../hooks/useUsers';
+import { ProductCard, SearchBar } from '../../marketplace';
 import { IProductData } from '../../../interfaces';
-import {
-  ExtendedCard,
-  Filters,
-  FullCard,
-  ProductCard,
-  SearchBar
-} from '../../marketplace';
 
 const data: IProductData[] = [
   {
@@ -37,16 +29,6 @@ const data: IProductData[] = [
 ];
 
 const DashboardCI = () => {
-  const { logout, user } = useUsers();
-
-  const [filterText, updateFilterText] = useState('all');
-
-  function onFilterSelected(filterValue: any) {
-    updateFilterText(filterValue);
-  }
-
-  console.log(filterText);
-
   return (
     <div>
       <div className="my-10">

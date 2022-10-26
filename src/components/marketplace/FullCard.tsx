@@ -1,4 +1,3 @@
-// Tarjeta al ver el detalle del producto y querer comprarlo
 import { IProductData } from '../../interfaces';
 
 export const FullCard = ({ title, price, img, stock }: IProductData) => {

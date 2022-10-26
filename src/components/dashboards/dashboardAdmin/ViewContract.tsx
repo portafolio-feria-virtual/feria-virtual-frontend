@@ -1,21 +1,17 @@
 import { useState } from 'react';
-import { IoMdContract, IoMdHeartEmpty } from 'react-icons/io';
-import { string } from 'yup';
-import { IContract } from '../../../interfaces/contract.interface';
-
 import { ContractTable } from '../../contract/ContractTable';
-import ContractForm from './ContractForm';
+import { IContract } from '../../../interfaces';
 
 const data: IContract[] = [
   {
-    idContract: 'AABB00',
+    id: 'AABB00',
     companyName: 'Ariztia',
     initDate: '26/10/2021',
     modifyDate: '27/11/2021',
     endDate: '25/12/2021'
   },
   {
-    idContract: 'BBAA00',
+    id: 'BBAA00',
     companyName: 'Santa Isabel',
     initDate: '27/10/2021',
     modifyDate: '28/11/2021',
@@ -104,18 +100,16 @@ export const ViewContract = () => {
           <tbody>
             {data
               .map(contract => (
-                <ContractTable key={contract.idContract} {...contract} />
+                <ContractTable key={contract.id} {...contract} />
               ))
               .filter(
                 company =>
                   company.props.companyName
                     .toLowerCase()
-                    .includes(search.toLowerCase()) | //FILTRADO X NOMBRE EMPRESA
+                    .includes(search.toLowerCase()) ||
                   company.props.idContract
                     .toLowerCase()
-                    .includes(search.toLowerCase()) //FILTRADO X ID CONTRATO
-                //company.props.startDate.includes(dateSearch) | //FILTRADO POR FECHA INICIO
-                //company.props.endDate.includes(dateSearch)
+                    .includes(search.toLowerCase())
               )}
           </tbody>
         </table>

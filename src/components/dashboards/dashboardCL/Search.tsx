@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import { IoIosArrowForward } from 'react-icons/io';
-import { IProductData, IUbicaciones } from '../../../interfaces';
+import { IProductData, IUbications } from '../../../interfaces';
 import { ExtendedCard } from '../../marketplace/ExtendedCard';
-import { Filters } from '../../marketplace/Filters';
 import { SearchBar } from '../../marketplace/SearchBar';
 
 const data: IProductData[] = [
@@ -32,7 +30,7 @@ const data: IProductData[] = [
   }
 ];
 
-const ubicaciones: IUbicaciones[] = [
+const ubicaciones: IUbications[] = [
   {
     id: '1',
     name: 'Melipilla'
@@ -43,17 +41,8 @@ const ubicaciones: IUbicaciones[] = [
   }
 ];
 
-interface IPriceProps {
-  minPrice: number | string | null;
-  maxPrice: number | string | null;
-}
-
 export const Search = () => {
   const [ubication, setUbication] = useState<string | null>('');
-
-  //const [minPrice, setMinPrice] = useState<number | string>(0);
-
-  //const [maxPrice, setMaxPrice] = useState<number | string>(999999999);
 
   const [filter, setFilter] = useState({
     ubication: '',
@@ -71,10 +60,6 @@ export const Search = () => {
   const clearFilters = () => {
     setFilter({ ubication: '', minPrice: 0, maxPrice: 999999999 });
   };
-
-  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  // };
 
   return (
     <div>
@@ -135,11 +120,6 @@ export const Search = () => {
                 max={999999999}
                 onChange={handleChange}
               />
-              {/* <button
-                type="submit"
-                className="rounded-full bg-gray-500 h-auto w-16">
-                <IoIosArrowForward className="w-full fill-white" />
-              </button> */}
             </div>
           </div>
           <div>

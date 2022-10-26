@@ -1,5 +1,4 @@
 import { useUsers } from '../../hooks/useUsers';
-import { ViewContract } from './dashboardAdmin/ViewContract';
 
 import DashboardCE from './dashboardCE/DashboardCE';
 import DashboardCL from './dashboardCL/DashboardCL';
@@ -11,18 +10,14 @@ const Dashboard = () => {
 
   return (
     <>
-      {
-      <ViewContract/>
-      /*isAuth && (
+      {isAuth && (
         <>
           {user?.tipo_usuario === '0' && <DashboardCE />}
           {user?.tipo_usuario === '1' && <DashboardCL />}
           {user?.tipo_usuario === '2' && <DashboardPD />}
           {user?.tipo_usuario === '3' && <DashboardTA />}
         </>
-      )*/
-      
-      }
+      )}
     </>
   );
 };

@@ -1,18 +1,15 @@
-import { useState } from 'react';
-import { IContract } from '../../interfaces/contract.interface';
+import { IContract } from '../../interfaces';
 
 export const ContractTable = ({
-  idContract,
+  id,
   companyName,
   initDate,
   modifyDate,
   endDate
 }: IContract) => {
   return (
-    //llenado de tabla
-
-    <tr key={idContract} className="border">
-      <td className="py-4 px-6 border">{idContract}</td>
+    <tr key={id} className="border">
+      <td className="py-4 px-6 border">{id}</td>
       <td className="py-4 px-6 border">{companyName}</td>
       <td className="py-4 px-6 border">{initDate}</td>
       <td className="py-4 px-6 border">{modifyDate}</td>

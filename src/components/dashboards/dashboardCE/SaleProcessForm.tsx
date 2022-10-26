@@ -1,13 +1,10 @@
-import { useState } from 'react';
-import { Country, DefaultButton, LoadingButton, Input } from '../../ui';
-import {IProcessSale} from '../../../interfaces/processSale.interface';
 import { FieldArray, Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
+import { Country, DefaultButton, Input } from '../../ui';
 import { SaleProcessConfirmation } from './SaleProcessConfirmation';
+import { IProcessSale } from '../../../interfaces';
 
 export const SaleProcessForm = () => {
-  const [showModal, setShowModal] = useState(false);
-
   const initialValues: IProcessSale = {
     id: '',
     name: '',
@@ -18,7 +15,7 @@ export const SaleProcessForm = () => {
     city: '',
     street: '',
     postalCode: '',
-    listProduct: ([] = []),
+    productList: [],
     maxAmount: 0,
     initDate: '',
     processStatus: 'Publicada'
@@ -34,11 +31,15 @@ export const SaleProcessForm = () => {
     street: Yup.string().required('*Este campo es requerido'),
     postalCode: Yup.string().required('*Este campo es requerido'),
     maxAmount: Yup.number().required('*Este campo es requerido'),
-    listProduct: Yup.array().required('*Este campo es requerido')
+    productList: Yup.array().required('*Este campo es requerido')
   });
 
-  const onSubmit = (values: IProcessSale,actions: FormikHelpers<IProcessSale>) => {
-    let fecha: Date = new Date();
+  const onSubmit = (
+    values: IProcessSale,
+    actions: FormikHelpers<IProcessSale>
+  ) => {
+    const date = new Date();
+
     const processSale: IProcessSale = {
       id: values.id,
       name: values.name,
@@ -49,9 +50,9 @@ export const SaleProcessForm = () => {
       city: values.city,
       street: values.city,
       postalCode: values.postalCode,
-      listProduct: values.listProduct,
+      productList: values.productList,
       maxAmount: values.maxAmount,
-      initDate: fecha.toLocaleDateString('es-ES'),
+      initDate: date.toLocaleDateString('es-ES'),
       processStatus: values.processStatus
     };
 
@@ -59,10 +60,10 @@ export const SaleProcessForm = () => {
     console.log(processSale);
   };
 
-  const agregarProductoList = (values: IProcessSale) => {
-    values.listProduct.push();
-    console.log(values.listProduct.length);
-  };
+  // const addProductList = (values: IProcessSale) => {
+  //   values.productList.push();
+  //   console.log(values.productList.length);
+  // };
 
   return (
     <Formik
@@ -73,7 +74,6 @@ export const SaleProcessForm = () => {
         values,
         touched,
         errors,
-        isSubmitting,
         handleChange,
         handleBlur,
         handleSubmit
@@ -173,8 +173,8 @@ export const SaleProcessForm = () => {
             </div>
 
             <div>
-              <FieldArray name="listProduct">
-                {({ insert, remove, push }) => (
+              <FieldArray name="productList">
+                {({ remove, push }) => (
                   <div className="overflow-x-auto relative">
                     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                       <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -185,15 +185,15 @@ export const SaleProcessForm = () => {
                         </tr>
                       </thead>
                       <tbody className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        {values.listProduct.map((product, index) => (
+                        {values.productList.map((product, index) => (
                           <tr key={index}>
                             <td>
                               <Input
                                 type="text"
-                                name={`listProduct[${index}].name`}
+                                name={`productList[${index}].name`}
                                 label=""
                                 placeholder="Nombre producto"
-                                value={values.listProduct[index].name}
+                                value={values.productList[index].name}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 required
@@ -202,10 +202,10 @@ export const SaleProcessForm = () => {
                             <td>
                               <Input
                                 type="number"
-                                name={`listProduct[${index}].amount`}
+                                name={`productList[${index}].amount`}
                                 label=""
                                 placeholder="Ingrese la cantidad Kg "
-                                value={values.listProduct[index].amount}
+                                value={values.productList[index].amount}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 required
@@ -247,45 +247,40 @@ export const SaleProcessForm = () => {
               />
             </div>
 
-            
             <SaleProcessConfirmation>
-            <div className=" grid gap-5 grid-cols-1 md:grid-cols-2  ">
-              <label>Proceso: {values.name}</label>
-              <label>Descripcion: {values.description}</label>
-              <label>Fecha Cierre: {values.closeDate}</label>              
-            </div>
+              <div className=" grid gap-5 grid-cols-1 md:grid-cols-2  ">
+                <label>Proceso: {values.name}</label>
+                <label>Descripcion: {values.description}</label>
+                <label>Fecha Cierre: {values.closeDate}</label>
+              </div>
 
-            
-            <div className="grid gap-5 grid-cols-1 md:grid-cols-2">              
-              <label>Pais: {values.country}</label>
-              <label>Region / estado: {values.region}</label>              
-              <label>Ciudad: {values.city}</label>              
-              <label>Calle: {values.street}</label>              
-              <label>Codigo postal: {values.postalCode}</label>              
-            </div>
-            <div className="overflow-x-auto relative">
-              <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                  <th>Producto</th>
-                  <th>Cantidad(Kg)</th>
-                  
-                </tr>
-                </thead>
-                <tbody className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                { values.listProduct.map((product, index) => (
-                 <tr key={index}>
-                  <td>{product.name}</td>
-                  <td>{product.amount}</td>
-                 </tr>
-                ))}
-                </tbody>
-              </table>
-              <label>Monto estimado:${values.maxAmount}</label>
-            </div>
+              <div className="grid gap-5 grid-cols-1 md:grid-cols-2">
+                <label>Pais: {values.country}</label>
+                <label>Region / estado: {values.region}</label>
+                <label>Ciudad: {values.city}</label>
+                <label>Calle: {values.street}</label>
+                <label>Codigo postal: {values.postalCode}</label>
+              </div>
+              <div className="overflow-x-auto relative">
+                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                      <th>Producto</th>
+                      <th>Cantidad(Kg)</th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    {values.productList.map((product, index) => (
+                      <tr key={index}>
+                        <td>{product.name}</td>
+                        <td>{product.amount}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <label>Monto estimado:${values.maxAmount}</label>
+              </div>
             </SaleProcessConfirmation>
-            
-            
           </div>
         </form>
       )}
