@@ -1,4 +1,4 @@
-import { IAuthState, ILogin, IUser } from '../../interfaces/auth.interface';
+import { IAuthState, ILogin, IUser } from '../../interfaces';
 
 type AuthAction =
   | { type: 'LOGIN'; payload: ILogin }
