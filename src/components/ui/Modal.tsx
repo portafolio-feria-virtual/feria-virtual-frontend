@@ -1,4 +1,4 @@
-import Modal as ReactModal from 'react-modal';
+import Modal from 'react-modal';
 import { HiOutlineX } from 'react-icons/hi';
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
   children: JSX.Element | JSX.Element[];
 };
 
-export const Modal = ({ isOpen, close, children }: Props) => {
+export const CustomModal = ({ isOpen, close, children }: Props) => {
   const customStyles = {
     content: {
       top: '50%',
@@ -21,7 +21,7 @@ export const Modal = ({ isOpen, close, children }: Props) => {
 
   return (
     <div>
-      <ReactModal
+      <Modal
         isOpen={isOpen}
         onRequestClose={close}
         ariaHideApp={false}
@@ -34,9 +34,9 @@ export const Modal = ({ isOpen, close, children }: Props) => {
           />
         </span>
         {children}
-      </ReactModal>
+      </Modal>
     </div>
   );
 };
 
-export default Modal;
+export default CustomModal;
