@@ -1,5 +1,6 @@
 import { IProcessSale, IProductSale, ProcessStatus } from '../../../interfaces';
 import Licitation from './Licitation';
+import LicitationDetail from './LicitationDetail';
 
 export default function Filters() {
   const status: ProcessStatus[] = [
@@ -15,6 +16,16 @@ export default function Filters() {
       id: '1',
       name: 'Naranjas',
       amount: 500
+    },
+    {
+      id: '2',
+      name: 'Peras',
+      amount: 1000
+    },
+    {
+      id: '3',
+      name: 'Manzanas',
+      amount: 200
     }
   ];
 
@@ -68,6 +79,11 @@ export default function Filters() {
           </div>
         </div>
       </div>
+      {/* <div>
+      {dataProcess.map(licit => (
+          <LicitationDetail key={licit.id} {...licit} />      // Es solo para revisar que esté correcta
+        ))}
+      </div> */}
     </div>
   );
 }
