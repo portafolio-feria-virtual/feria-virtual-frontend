@@ -7,16 +7,17 @@ import { toast } from 'react-hot-toast';
 
 import { useUsers } from '../../../hooks/useUsers';
 
-import { DefaultButton, Input, LoadingButton, Country } from '../../ui';
+import { DefaultButton, Input, LoadingButton } from '../../ui';
 import { IRegister, IUser, UserTypes } from '../../../interfaces';
+import { Country } from '../../ui/Country';
 
 const RegisterFormCE = () => {
   const { register } = useUsers();
   const navigate = useNavigate();
 
   const initialValues: IRegister = {
-    first_name: '',
-    last_name: '',
+    firstName: '',
+    lastName: '',
     username: '',
     email: '',
     address: '',
@@ -24,13 +25,13 @@ const RegisterFormCE = () => {
     country: '',
     password: '',
     confirmPassword: '',
-    tipo_usuario: UserTypes.CLIENTE_EXTRANJERO,
+    type: UserTypes.CLIENTE_EXTRANJERO,
     terms: false
   };
 
   const validationSchema = Yup.object({
-    first_name: Yup.string().required('* Este campo es requerido.'),
-    last_name: Yup.string().required('* Este campo es requerido.'),
+    firstName: Yup.string().required('* Este campo es requerido.'),
+    lastName: Yup.string().required('* Este campo es requerido.'),
     username: Yup.string().required('* Este campo es requerido.'),
     email: Yup.string()
       .email('* Ingrese un correo válido')
@@ -53,21 +54,23 @@ const RegisterFormCE = () => {
 
   const onSubmit = (values: IUser, actions: FormikHelpers<IRegister>) => {
     const user: IUser = {
-      first_name: values.first_name,
-      last_name: values.last_name,
+      firstName: values.firstName,
+      lastName: values.lastName,
       username: values.username,
       email: values.email,
       address: values.address,
       phone: values.phone,
       country: values.country,
       password: values.password,
-      tipo_usuario: values.tipo_usuario
+      type: values.type
     };
 
     setTimeout(async () => {
       actions.setSubmitting(false);
 
       const response = await register(user);
+
+      console.log(response?.status);
 
       if (response?.status !== 201) {
         toast.error('El usuario ya existe.');
@@ -101,24 +104,24 @@ const RegisterFormCE = () => {
           <div className="grid gap-5 grid-cols-1 md:grid-cols-2">
             <Input
               type="text"
-              name="first_name"
+              name="firstName"
               label="Nombre *"
               placeholder="Jhon"
-              value={values.first_name}
-              touched={touched.first_name}
-              errors={errors.first_name}
+              value={values.firstName}
+              touched={touched.firstName}
+              errors={errors.firstName}
               onChange={handleChange}
               onBlur={handleBlur}
             />
 
             <Input
               type="text"
-              name="last_name"
+              name="lastName"
               label="Apellido *"
               placeholder="Doe"
-              value={values.last_name}
-              touched={touched.last_name}
-              errors={errors.last_name}
+              value={values.lastName}
+              touched={touched.lastName}
+              errors={errors.lastName}
               onChange={handleChange}
               onBlur={handleBlur}
             />

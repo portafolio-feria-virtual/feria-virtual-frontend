@@ -1,6 +1,5 @@
 import { IProcessSale, IProductSale, ProcessStatus } from '../../../interfaces';
 import Licitation from './Licitation';
-import LicitationDetail from './LicitationDetail';
 
 export default function Filters() {
   const status: ProcessStatus[] = [
@@ -60,7 +59,9 @@ export default function Filters() {
         <select name="" id="" className="border">
           <option value=""></option>
           {status.map(options => (
-            <option value={options}>{options}</option>
+            <option key={options} value={options}>
+              {options}
+            </option>
           ))}
         </select>
         <div>

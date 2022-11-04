@@ -17,24 +17,24 @@ const RegisterFormCI = () => {
   const navigate = useNavigate();
 
   const initialValues: IRegister = {
-    first_name: '',
-    last_name: '',
+    firstName: '',
+    lastName: '',
     username: '',
     email: '',
     address: '',
     phone: '',
     rut: '',
-    doc_num: '',
-    business_name: '',
+    documentNumber: '',
+    businessName: '',
     password: '',
     confirmPassword: '',
-    tipo_usuario: UserTypes.CLIENTE_LOCAL,
+    type: UserTypes.CLIENTE_LOCAL,
     terms: false
   };
 
   const validationSchema = Yup.object({
-    first_name: Yup.string().required('* Este campo es requerido.'),
-    last_name: Yup.string().required('* Este campo es requerido.'),
+    firstName: Yup.string().required('* Este campo es requerido.'),
+    lastName: Yup.string().required('* Este campo es requerido.'),
     username: Yup.string().required('* Este campo es requerido.'),
     email: Yup.string()
       .email('* Ingrese un correo válido.')
@@ -44,8 +44,8 @@ const RegisterFormCI = () => {
     rut: Yup.string()
       .required('* Este campo es requerido.')
       .matches(/^[0-9]+-[0-9kK]{1}$/, '* Ingrese un RUT válido (11111111-1).'),
-    doc_num: Yup.string().required('* Este campo es requerido.'),
-    business_name: Yup.string(),
+    documentNumber: Yup.string().required('* Este campo es requerido.'),
+    businessName: Yup.string(),
     password: Yup.string()
       .required('* Este campo es requerido.')
       .min(8, '* La contraseña debe tener al menos 8 caracteres.'),
@@ -61,17 +61,17 @@ const RegisterFormCI = () => {
 
   const onSubmit = (values: IRegister, actions: FormikHelpers<IRegister>) => {
     const user: IUser = {
-      first_name: values.first_name,
-      last_name: values.last_name,
+      firstName: values.firstName,
+      lastName: values.lastName,
       username: values.username,
       phone: values.phone,
       email: values.email,
       address: values.address,
       rut: values.rut,
-      doc_num: values.doc_num,
-      business_name: values.business_name,
+      documentNumber: values.documentNumber,
+      businessName: values.businessName,
       password: values.password,
-      tipo_usuario: values.tipo_usuario
+      type: values.type
     };
 
     setTimeout(async () => {
@@ -111,22 +111,22 @@ const RegisterFormCI = () => {
           <div className="grid gap-5 grid-cols-1 md:grid-cols-2">
             <Input
               type="text"
-              name="first_name"
+              name="firstName"
               label="Nombre *"
-              value={values.first_name}
-              touched={touched.first_name}
-              errors={errors.first_name}
+              value={values.firstName}
+              touched={touched.firstName}
+              errors={errors.firstName}
               onChange={handleChange}
               onBlur={handleBlur}
             />
 
             <Input
               type="text"
-              name="last_name"
+              name="lastName"
               label="Apellido *"
-              value={values.last_name}
-              touched={touched.last_name}
-              errors={errors.last_name}
+              value={values.lastName}
+              touched={touched.lastName}
+              errors={errors.lastName}
               onChange={handleChange}
               onBlur={handleBlur}
             />
@@ -190,11 +190,11 @@ const RegisterFormCI = () => {
 
             <Input
               type="text"
-              name="doc_num"
+              name="documentNumber"
               label="Número de documento *"
-              value={values.doc_num}
-              touched={touched.doc_num}
-              errors={errors.doc_num}
+              value={values.documentNumber}
+              touched={touched.documentNumber}
+              errors={errors.documentNumber}
               onChange={handleChange}
               onBlur={handleBlur}
             />
@@ -202,9 +202,9 @@ const RegisterFormCI = () => {
 
           <Input
             type="text"
-            name="business_name"
+            name="businessName"
             label="Razón social"
-            value={values.business_name}
+            value={values.businessName}
             onChange={handleChange}
           />
 
