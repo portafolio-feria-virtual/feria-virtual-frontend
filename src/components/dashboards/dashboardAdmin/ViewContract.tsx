@@ -23,7 +23,6 @@ export const ViewContract = () => {
   const date = new Date();
   console.log(date);
   const [search, setSearch] = useState<string>('');
-  //const [dateSearch, setDateSearch] = useState<string>('');
 
   return (
     <div className="mt-5 ">

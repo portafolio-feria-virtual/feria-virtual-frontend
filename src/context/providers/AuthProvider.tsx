@@ -5,6 +5,7 @@ import { useReducer, useState, useEffect } from 'react';
 import { authReducer } from '../reducers/authReducer';
 import { AxiosError } from 'axios';
 import Cookies from 'js-cookie';
+import { UserTypes } from '../../interfaces';
 
 type props = {
   children: JSX.Element | JSX.Element[];
@@ -18,11 +19,39 @@ const INITIAL_STATE: IAuthState = {
 export const AuthProvider = ({ children }: props) => {
   const [authState, dispatch] = useReducer(authReducer, INITIAL_STATE);
   const [isAuth, setIsAuth] = useState<boolean>(false);
+  const [csrf, setCsrf] = useState<string | null>(null);
+
+  const getCsrfToken = async () => {
+    try {
+      if (csrf === null) {
+        const { data } = await axios.get(
+          'http://localhost:8000/api/auth/csrf_cookie',
+          {
+            withCredentials: true
+          }
+        );
+        setCsrf(data.csrfToken);
+      }
+    } catch (error) {
+      console.log((error as AxiosError).message);
+    }
+  };
 
   const register = async (user: IUser) => {
+    console.log(user);
+
+    let userType;
+
+    if (user.type === UserTypes.CLIENTE_EXTRANJERO) userType = 'signupExt';
+    if (user.type === UserTypes.CLIENTE_LOCAL) userType = 'signupLoc';
+    if (user.type === UserTypes.PRODUCTOR) userType = 'signupPro';
+    if (user.type === UserTypes.TRANSPORTISTA) userType = 'signupTra';
+
+    console.log(userType);
+
     try {
       const response = await axios.post<IUser>(
-        'http://localhost:8000/api/auth/signup/',
+        `http://localhost:8000/api/auth/${userType}/`,
         user
       );
 
@@ -53,7 +82,8 @@ export const AuthProvider = ({ children }: props) => {
         {
           withCredentials: true,
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrf as string
           }
         }
       );
@@ -122,6 +152,10 @@ export const AuthProvider = ({ children }: props) => {
       console.log((error as AxiosError).message);
     }
   };
+
+  useEffect(() => {
+    getCsrfToken();
+  }, []);
 
   useEffect(() => {
     getUser();

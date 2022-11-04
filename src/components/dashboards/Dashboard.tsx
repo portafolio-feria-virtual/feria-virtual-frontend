@@ -4,18 +4,19 @@ import DashboardCE from './dashboardCE/DashboardCE';
 import DashboardCL from './dashboardCL/DashboardCL';
 import DashboardPD from './dashboardPD/DashboardPD';
 import DashboardTA from './dashboardTA/DashboardTA';
+import { UserTypes } from '../../interfaces/auth.interface';
 
 const Dashboard = () => {
   const { user, isAuth } = useUsers();
 
   return (
     <>
-      {isAuth && (
+      {isAuth && user && (
         <>
-          {user?.tipo_usuario === '0' && <DashboardCE />}
-          {user?.tipo_usuario === '1' && <DashboardCL />}
-          {user?.tipo_usuario === '2' && <DashboardPD />}
-          {user?.tipo_usuario === '3' && <DashboardTA />}
+          {user?.type === UserTypes.CLIENTE_EXTRANJERO && <DashboardCE />}
+          {user?.type === UserTypes.CLIENTE_LOCAL && <DashboardCL />}
+          {user?.type === UserTypes.PRODUCTOR && <DashboardPD />}
+          {user?.type === UserTypes.TRANSPORTISTA && <DashboardTA />}
         </>
       )}
     </>
