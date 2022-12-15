@@ -19,5 +19,5 @@ export interface IProcessSale {
   maxAmount: number;
   processStatus: ProcessStatus;
   initDate: string;
-  closeDate: string;
+  endDate: string;
 }

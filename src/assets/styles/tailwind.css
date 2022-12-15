@@ -46,10 +46,22 @@
   button {
     @apply border-none focus:ring-0;
   }
+
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number'] {
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield !important;
+  }
 }
 
 @layer components {
-  .active {
-    @apply font-bold text-green-500;
+  .active div {
+    @apply bg-green-500 text-white;
+  }
+
+  .active-link div {
+    @apply text-green-500;
   }
 }

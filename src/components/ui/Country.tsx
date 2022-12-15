@@ -1,6 +1,6 @@
 import { FormikTouched } from 'formik';
 import { FC, SelectHTMLAttributes } from 'react';
-import { countries } from '../utils/countries';
+import { countries } from './utils/countries';
 
 interface ICountry extends SelectHTMLAttributes<HTMLSelectElement> {
   name: string | undefined;
@@ -48,9 +48,7 @@ export const Country: FC<ICountry> = ({ name, touched, errors, ...rest }) => {
         </svg>
       </div>
 
-      {touched && errors && (
-        <div className="text-red-500 text-xs italic pt-2">{errors}</div>
-      )}
+      {touched && errors && <div className="text-red-500 text-xs italic pt-2">{errors}</div>}
     </div>
   );
 };

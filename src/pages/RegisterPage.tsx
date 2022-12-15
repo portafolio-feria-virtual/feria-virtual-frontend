@@ -1,8 +1,7 @@
 import { Outlet } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
-
 import { Title } from '../components/ui';
-import RegisterOptions from '../components/register/RegisterOptions';
+import { RegisterOptions } from '../components/register';
+import { Toaster } from 'react-hot-toast';
 
 const RegisterPage = () => {
   return (

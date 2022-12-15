@@ -1,4 +1,4 @@
-import RegisterFormCE from './RegisterFormCE';
+import RegisterFormCE from '../RegisterCE/RegisterFormCE';
 
 export const RegisterCE = () => {
   return (

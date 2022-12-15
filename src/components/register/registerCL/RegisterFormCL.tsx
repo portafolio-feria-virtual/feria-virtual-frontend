@@ -1,19 +1,14 @@
-import { FormikHelpers, Formik } from 'formik';
-
 import { Link, useNavigate } from 'react-router-dom';
-import * as Yup from 'yup';
-
+import { Formik, FormikHelpers } from 'formik';
 import { toast } from 'react-hot-toast';
 
-import { useUsers } from '../../../hooks/useUsers';
+import { useAuth } from '../../../hooks/useAuth';
+import { Input, Button } from '../../ui';
+import { registerSchemaCL } from '../../utils';
+import { IRegister, UserType } from '../../../interfaces';
 
-import { DefaultButton, LoadingButton } from '../../ui';
-import { Input } from '../../ui/Input';
-
-import { IRegister, IUser, UserTypes } from '../../../interfaces';
-
-const RegisterFormCI = () => {
-  const { register } = useUsers();
+const RegisterFormCL = () => {
+  const { signUp } = useAuth();
   const navigate = useNavigate();
 
   const initialValues: IRegister = {
@@ -28,85 +23,37 @@ const RegisterFormCI = () => {
     businessName: '',
     password: '',
     confirmPassword: '',
-    type: UserTypes.CLIENTE_LOCAL,
-    terms: false
+    terms: false,
+    type: UserType.CLIENTE_LOCAL
   };
 
-  const validationSchema = Yup.object({
-    firstName: Yup.string().required('* Este campo es requerido.'),
-    lastName: Yup.string().required('* Este campo es requerido.'),
-    username: Yup.string().required('* Este campo es requerido.'),
-    email: Yup.string()
-      .email('* Ingrese un correo válido.')
-      .required('* Este campo es requerido.'),
-    address: Yup.string().required('* Este campo es requerido.'),
-    phone: Yup.string(),
-    rut: Yup.string()
-      .required('* Este campo es requerido.')
-      .matches(/^[0-9]+-[0-9kK]{1}$/, '* Ingrese un RUT válido (11111111-1).'),
-    documentNumber: Yup.string().required('* Este campo es requerido.'),
-    businessName: Yup.string(),
-    password: Yup.string()
-      .required('* Este campo es requerido.')
-      .min(8, '* La contraseña debe tener al menos 8 caracteres.'),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], '* Las contraseñas no coinciden.')
-      .required('* Este campo es requerido.')
-      .min(8, '* La contraseña debe tener al menos 8 caracteres.'),
-    terms: Yup.boolean().oneOf(
-      [true],
-      '* Debe aceptar los términos y condiciones.'
-    )
-  });
-
   const onSubmit = (values: IRegister, actions: FormikHelpers<IRegister>) => {
-    const user: IUser = {
-      firstName: values.firstName,
-      lastName: values.lastName,
-      username: values.username,
-      phone: values.phone,
-      email: values.email,
-      address: values.address,
-      rut: values.rut,
-      documentNumber: values.documentNumber,
-      businessName: values.businessName,
-      password: values.password,
-      type: values.type
-    };
+    actions.setSubmitting(true);
+    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+    const { confirmPassword, terms, ...user } = values;
 
     setTimeout(async () => {
-      actions.setSubmitting(false);
+      const status = await signUp(user);
 
-      const response = await register(user);
-
-      if (response?.status !== 201) {
-        toast.error('El usuario ya existe.');
+      if (status !== 201) {
+        toast.error('El usuario ya existe');
+        actions.setSubmitting(false);
         return;
       }
 
-      toast.success('Usuario registrado con éxito.');
+      toast.success('Usuario registrado con éxito');
+      actions.setSubmitting(false);
       actions.resetForm();
 
       setTimeout(() => {
-        navigate('/ingreso', { replace: true });
+        navigate('/login');
       }, 1000);
     }, 1500);
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}>
-      {({
-        values,
-        touched,
-        errors,
-        isSubmitting,
-        handleChange,
-        handleBlur,
-        handleSubmit
-      }) => (
+    <Formik initialValues={initialValues} validationSchema={registerSchemaCL} onSubmit={onSubmit}>
+      {({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
         <form onSubmit={handleSubmit} className="space-y-5 max-w-3xl mx-auto">
           <div className="grid gap-5 grid-cols-1 md:grid-cols-2">
             <Input
@@ -205,12 +152,15 @@ const RegisterFormCI = () => {
             name="businessName"
             label="Razón social"
             value={values.businessName}
+            touched={touched.businessName}
+            errors={errors.businessName}
             onChange={handleChange}
+            onBlur={handleBlur}
           />
 
           <div className="grid gap-5 grid-cols-1 md:grid-cols-2">
             <Input
-              type="text"
+              type="password"
               name="password"
               label="Contraseña *"
               value={values.password}
@@ -221,7 +171,7 @@ const RegisterFormCI = () => {
             />
 
             <Input
-              type="text"
+              type="password"
               name="confirmPassword"
               label="Repita su contraseña *"
               value={values.confirmPassword}
@@ -249,22 +199,11 @@ const RegisterFormCI = () => {
             </div>
 
             {touched.terms && errors.terms && (
-              <span className="text-red-500 text-xs italic pt-2 ml-auto">
-                {errors.terms}
-              </span>
+              <span className="text-red-500 text-xs italic pt-2 ml-auto">{errors.terms}</span>
             )}
           </div>
 
-          {isSubmitting ? (
-            <LoadingButton
-              type="submit"
-              id="1"
-              text="Registrando..."
-              disabled
-            />
-          ) : (
-            <DefaultButton type="submit" id="1" text="Registrarse" />
-          )}
+          <Button text="Registrarse" loading={isSubmitting} />
 
           <p className="text-center text-gray-500">
             ¿Ya tiene una cuenta?{' '}
@@ -278,4 +217,4 @@ const RegisterFormCI = () => {
   );
 };
 
-export default RegisterFormCI;
+export default RegisterFormCL;

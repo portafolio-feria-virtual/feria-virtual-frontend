@@ -1,13 +1,7 @@
-import { NavLink } from '../ui/';
+import { NavLink } from '../ui';
+import { registerItems } from '../utils';
 
-export const registerItems = [
-  { id: 1, name: 'Cliente extranjero', path: 'cliente-extranjero' },
-  { id: 2, name: 'Cliente Local', path: 'cliente-local' },
-  { id: 3, name: 'Productor', path: 'productor' },
-  { id: 4, name: 'Transportista', path: 'transportista' }
-];
-
-const RegisterOptions = () => {
+export const RegisterOptions = () => {
   return (
     <div className="flex overflow-auto mb-10 -mx-4 sm:-mx-6">
       <div className="flex-none min-w-full px-4 sm:px-6">
@@ -22,5 +16,3 @@ const RegisterOptions = () => {
     </div>
   );
 };
-
-export default RegisterOptions;

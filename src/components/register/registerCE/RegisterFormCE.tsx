@@ -1,18 +1,14 @@
 import { Link, useNavigate } from 'react-router-dom';
-
 import { Formik, FormikHelpers } from 'formik';
-import * as Yup from 'yup';
-
 import { toast } from 'react-hot-toast';
 
-import { useUsers } from '../../../hooks/useUsers';
-
-import { DefaultButton, Input, LoadingButton } from '../../ui';
-import { IRegister, IUser, UserTypes } from '../../../interfaces';
-import { Country } from '../../ui/Country';
+import { useAuth } from '../../../hooks/useAuth';
+import { Input, Button, Country } from '../../ui';
+import { registerSchemaCE } from '../../utils';
+import { IRegister, UserType } from '../../../interfaces';
 
 const RegisterFormCE = () => {
-  const { register } = useUsers();
+  const { signUp } = useAuth();
   const navigate = useNavigate();
 
   const initialValues: IRegister = {
@@ -22,85 +18,41 @@ const RegisterFormCE = () => {
     email: '',
     address: '',
     phone: '',
-    country: '',
+    country: '123',
     password: '',
     confirmPassword: '',
-    type: UserTypes.CLIENTE_EXTRANJERO,
-    terms: false
+    terms: false,
+    type: UserType.CLIENTE_EXTRANJERO
   };
 
-  const validationSchema = Yup.object({
-    firstName: Yup.string().required('* Este campo es requerido.'),
-    lastName: Yup.string().required('* Este campo es requerido.'),
-    username: Yup.string().required('* Este campo es requerido.'),
-    email: Yup.string()
-      .email('* Ingrese un correo válido')
-      .required('* Este campo es requerido.'),
-    address: Yup.string().required('* Este campo es requerido.'),
-    phone: Yup.string().required('* Este campo es requerido.'),
-    country: Yup.string().required('* Este campo es requerido.'),
-    password: Yup.string()
-      .required('* Este campo es requerido.')
-      .min(8, '* La contraseña debe tener al menos 8 caracteres.'),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], '* Las contraseñas no coinciden.')
-      .required('* Este campo es requerido.')
-      .min(8, '* La contraseña debe tener al menos 8 caracteres.'),
-    terms: Yup.boolean().oneOf(
-      [true],
-      '* Debe aceptar los términos y condiciones.'
-    )
-  });
-
-  const onSubmit = (values: IUser, actions: FormikHelpers<IRegister>) => {
-    const user: IUser = {
-      firstName: values.firstName,
-      lastName: values.lastName,
-      username: values.username,
-      email: values.email,
-      address: values.address,
-      phone: values.phone,
-      country: values.country,
-      password: values.password,
-      type: values.type
-    };
+  const onSubmit = (values: IRegister, actions: FormikHelpers<IRegister>) => {
+    actions.setSubmitting(true);
+    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+    const { confirmPassword, terms, ...user } = values;
 
     setTimeout(async () => {
-      actions.setSubmitting(false);
+      const status = await signUp(user);
 
-      const response = await register(user);
-
-      console.log(response?.status);
-
-      if (response?.status !== 201) {
-        toast.error('El usuario ya existe.');
+      if (status !== 201) {
+        toast.error('El usuario ya existe');
+        actions.setSubmitting(false);
         return;
       }
 
-      toast.success('Usuario registrado con éxito.');
+      toast.success('Usuario registrado con éxito');
+      actions.setSubmitting(false);
       actions.resetForm();
 
       setTimeout(() => {
-        navigate('/ingreso', { replace: true });
+        navigate('/login');
       }, 1000);
     }, 1500);
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}>
-      {({
-        values,
-        touched,
-        errors,
-        isSubmitting,
-        handleChange,
-        handleBlur,
-        handleSubmit
-      }) => (
-        <form onSubmit={handleSubmit} className="space-y-5 max-w-3xl mx-auto">
+    <Formik initialValues={initialValues} validationSchema={registerSchemaCE} onSubmit={onSubmit}>
+      {({ values, errors, touched, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
           <div className="grid gap-5 grid-cols-1 md:grid-cols-2">
             <Input
               type="text"
@@ -223,17 +175,11 @@ const RegisterFormCE = () => {
             </div>
 
             {touched.terms && errors.terms && (
-              <span className="text-red-500 text-xs italic pt-2 ml-auto">
-                {errors.terms}
-              </span>
+              <span className="text-red-500 text-xs italic pt-2 ml-auto">{errors.terms}</span>
             )}
           </div>
 
-          {isSubmitting ? (
-            <LoadingButton type="submit" text="Registrando..." disabled />
-          ) : (
-            <DefaultButton type="submit" text="Registrarse" />
-          )}
+          <Button text="Registrarse" loading={isSubmitting} />
 
           <p className="text-center text-gray-500">
             ¿Ya tiene una cuenta?{' '}
