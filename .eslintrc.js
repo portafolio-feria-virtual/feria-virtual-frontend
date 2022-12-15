@@ -26,6 +26,7 @@ module.exports = {
     // Errors
     'react/react-in-jsx-scope': RULES.OFF,
     'react/prop-types': RULES.OFF,
+    '@typescript-eslint/no-var-requires': RULES.OFF,
 
     // Warnings
     'no-unused-vars': RULES.WARN,

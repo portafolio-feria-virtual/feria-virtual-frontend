@@ -15,4 +15,14 @@ export interface IUser {
   size?: string;
   cooling?: boolean;
   password?: string;
+  isActive?: boolean;
+}
+
+export enum UserType {
+  'CLIENTE_EXTRANJERO' = 'Extranjero',
+  'CLIENTE_LOCAL' = 'Local',
+  'PRODUCTOR' = 'Productor',
+  'TRANSPORTISTA' = 'Transportista',
+  'ADMIN' = 'Administrador',
+  'CONSULTOR' = 'Consultor'
 }

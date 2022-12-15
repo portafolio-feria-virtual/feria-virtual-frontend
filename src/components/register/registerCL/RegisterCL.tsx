@@ -1,6 +1,6 @@
 import RegisterFormCI from './RegisterFormCL';
 
-export const RegisterCI = () => {
+export const RegisterCL = () => {
   return (
     <>
       <h4 className="mb-10">

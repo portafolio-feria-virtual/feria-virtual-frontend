@@ -1,17 +1,15 @@
-export interface IProductData {
+export interface ProductData {
   id: string;
   title: string;
   price: number;
-  img: string;
+  image: string;
   stock: number;
   ubication: string;
 }
 
 export interface IUbications {
-  id: string;
+  id: number;
   name: string;
 }
 
-//export interface IProductDetails {}
-
-//export interface ISellerDetail {}
+export type IProductData = Omit<ProductData, 'id'>;

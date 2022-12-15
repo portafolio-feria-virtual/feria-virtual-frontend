@@ -1,7 +1,9 @@
-export interface IExternalSale {
+export interface ExternalSale {
   id: string;
-  offerName: string;
-  offerDescription: string;
-  offerFile: string;
-  offerValue: number;
+  name: string;
+  description: string;
+  fileName: string | boolean;
+  amount: number;
 }
+
+export type IExternalSale = Omit<ExternalSale, 'id'>;

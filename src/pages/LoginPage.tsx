@@ -1,6 +1,6 @@
 import { Toaster } from 'react-hot-toast';
 
-import LoginForm from '../components/login/LoginForm';
+import { UserLoginForm } from '../components/login/userLogin';
 import { Title } from '../components/ui';
 
 import LoginImage from '../assets/images/login_image.svg';
@@ -15,14 +15,10 @@ const LoginPage = () => {
             body="Introduzca su usuario y contraseña para acceder a la plataforma."
           />
 
-          <LoginForm />
+          <UserLoginForm />
         </div>
 
-        <img
-          src={LoginImage}
-          alt="Login image"
-          className="max-w-xl lg:w-full"
-        />
+        <img src={LoginImage} alt="Login image" className="max-w-xl lg:w-full" />
       </div>
 
       <Toaster position="top-right" />

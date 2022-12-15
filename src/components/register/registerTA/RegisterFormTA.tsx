@@ -1,13 +1,14 @@
-import { IRegister, UserTypes, IUser } from '../../../interfaces';
-import * as Yup from 'yup';
-import { FormikHelpers, Formik } from 'formik';
-import { DefaultButton, Input, LoadingButton } from '../../ui';
 import { Link, useNavigate } from 'react-router-dom';
+import { Formik, FormikHelpers } from 'formik';
 import { toast } from 'react-hot-toast';
-import { useUsers } from '../../../hooks/useUsers';
 
-const RegisterFormTa = () => {
-  const { register } = useUsers();
+import { useAuth } from '../../../hooks/useAuth';
+import { Input, Button } from '../../ui';
+import { registerSchemaTA } from '../../utils';
+import { IRegister, UserType } from '../../../interfaces';
+
+const RegisterFormTA = () => {
+  const { signUp } = useAuth();
   const navigate = useNavigate();
 
   const initialValues: IRegister = {
@@ -24,86 +25,37 @@ const RegisterFormTa = () => {
     cooling: false,
     password: '',
     confirmPassword: '',
-    type: UserTypes.TRANSPORTISTA,
-    terms: false
+    terms: false,
+    type: UserType.CLIENTE_LOCAL
   };
 
-  const validationSchema = Yup.object({
-    firstName: Yup.string().required('* Este campo es requerido.'),
-    lastName: Yup.string().required('* Este campo es requerido.'),
-    username: Yup.string().required('* Este campo es requerido.'),
-    email: Yup.string()
-      .email('* Ingrese un correo válido.')
-      .required('* Este campo es requerido.'),
-    address: Yup.string().required('* Este campo es requerido.'),
-    phone: Yup.string(),
-    rut: Yup.string()
-      .required('* Este campo es requerido.')
-      .matches(/^[0-9]+-[0-9kK]{1}$/, '* Ingrese un RUT válido.'),
-    documentNumber: Yup.string().required('* Este campo es requerido.'),
-    capacity: Yup.string(),
-    size: Yup.string(),
-    cooling: Yup.boolean(),
-    password: Yup.string().required('* Este campo es requerido.'),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], '* Las contraseñas no coinciden.')
-      .required('* Este campo es requerido.'),
-    terms: Yup.boolean().oneOf(
-      [true],
-      '* Debe aceptar los términos y condiciones.'
-    )
-  });
-
   const onSubmit = (values: IRegister, actions: FormikHelpers<IRegister>) => {
-    const user: IUser = {
-      firstName: values.firstName,
-      lastName: values.lastName,
-      username: values.username,
-      phone: values.phone,
-      email: values.email,
-      address: values.address,
-      rut: values.rut,
-      documentNumber: values.documentNumber,
-      capacity: values.capacity,
-      size: values.size,
-      cooling: values.cooling,
-      password: values.password,
-      type: values.type
-    };
+    actions.setSubmitting(true);
+    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+    const { confirmPassword, terms, ...user } = values;
 
     setTimeout(async () => {
-      actions.setSubmitting(false);
+      const status = await signUp(user);
 
-      const response = await register(user);
-
-      if (response?.status !== 201) {
-        toast.error('El usuario ya existe.');
+      if (status !== 201) {
+        toast.error('El usuario ya existe');
+        actions.setSubmitting(false);
         return;
       }
 
-      toast.success('Usuario registrado con éxito.');
+      toast.success('Usuario registrado con éxito');
+      actions.setSubmitting(false);
       actions.resetForm();
 
       setTimeout(() => {
-        navigate('/ingreso', { replace: true });
+        navigate('/login');
       }, 1000);
     }, 1500);
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}>
-      {({
-        values,
-        touched,
-        errors,
-        isSubmitting,
-        handleChange,
-        handleBlur,
-        handleSubmit
-      }) => (
+    <Formik initialValues={initialValues} validationSchema={registerSchemaTA} onSubmit={onSubmit}>
+      {({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
         <form onSubmit={handleSubmit} className="space-y-5 max-w-3xl mx-auto">
           <div className="grid gap-5 grid-cols-1 md:grid-cols-2">
             <Input
@@ -214,7 +166,10 @@ const RegisterFormTa = () => {
               name="size"
               label="Dimensión Transporte (m3) *"
               value={values.size}
+              touched={touched.size}
+              errors={errors.size}
               onChange={handleChange}
+              onBlur={handleBlur}
             />
 
             <div className="flex flex-col">
@@ -228,23 +183,22 @@ const RegisterFormTa = () => {
                   onChange={handleChange}
                 />
                 <label htmlFor="cooling" className="text-green-500">
-                  Refrigeración *
+                  Refrigeración
                 </label>
               </div>
 
               {touched.cooling && errors.cooling && (
-                <span className="text-red-500 text-sm ml-auto">
-                  {errors.terms}
-                </span>
+                <span className="text-red-500 text-sm ml-auto">{errors.terms}</span>
               )}
             </div>
           </div>
 
           <div className="grid gap-5 grid-cols-1 md:grid-cols-2">
             <Input
-              type="text"
+              type="password"
               name="password"
               label="Contraseña *"
+              placeholder="*********"
               value={values.password}
               touched={touched.password}
               errors={errors.password}
@@ -253,9 +207,10 @@ const RegisterFormTa = () => {
             />
 
             <Input
-              type="text"
+              type="password"
               name="confirmPassword"
               label="Repita su contraseña *"
+              placeholder="*********"
               value={values.confirmPassword}
               touched={touched.confirmPassword}
               errors={errors.confirmPassword}
@@ -281,17 +236,11 @@ const RegisterFormTa = () => {
             </div>
 
             {touched.terms && errors.terms && (
-              <span className="text-red-500 text-xs italic pt-2 ml-auto">
-                {errors.terms}
-              </span>
+              <span className="text-red-500 text-xs italic pt-2 ml-auto">{errors.terms}</span>
             )}
           </div>
 
-          {isSubmitting ? (
-            <LoadingButton type="submit" text="Registrando..." disabled />
-          ) : (
-            <DefaultButton type="submit" text="Registrarse" />
-          )}
+          <Button text="Registrarse" loading={isSubmitting} />
 
           <p className="text-center text-gray-500">
             ¿Ya tiene una cuenta?{' '}
@@ -305,4 +254,4 @@ const RegisterFormTa = () => {
   );
 };
 
-export default RegisterFormTa;
+export default RegisterFormTA;

@@ -1,42 +1,38 @@
 import ReactModal from 'react-modal';
 import { HiOutlineX } from 'react-icons/hi';
 
-type Props = {
+type ModalProps = {
   isOpen: boolean;
-  close: () => void;
+  onRequestClose: () => void;
   children: JSX.Element | JSX.Element[];
 };
 
-export const Modal = ({ isOpen, close, children }: Props) => {
+export const Modal = ({ isOpen, onRequestClose, children }: ModalProps) => {
   const customStyles = {
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    },
     content: {
       top: '50%',
       left: '50%',
       right: 'auto',
       bottom: 'auto',
       marginRight: '-50%',
-      transform: 'translate(-50%, -50%)'
+      transform: 'translate(-50%, -50%)',
+      border: 'none'
     }
   };
 
   return (
-    <div>
-      <ReactModal
-        isOpen={isOpen}
-        onRequestClose={close}
-        ariaHideApp={false}
-        style={customStyles}>
-        <span className="flex">
-          <HiOutlineX
-            onClick={close}
-            size={25}
-            className="cursor-pointer ml-auto mb-3"
-          />
-        </span>
-        {children}
-      </ReactModal>
-    </div>
+    <ReactModal
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
+      ariaHideApp={false}
+      style={customStyles}>
+      <span className="flex">
+        <HiOutlineX onClick={onRequestClose} size={25} className="cursor-pointer ml-auto mb-3" />
+      </span>
+      {children}
+    </ReactModal>
   );
 };
-
-export default Modal;
