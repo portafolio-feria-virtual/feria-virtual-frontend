@@ -28,7 +28,7 @@ const ProcessSaleForm = () => {
 
   return (
     <Formik initialValues={initialValues} validationSchema={processSaleSchema} onSubmit={onSubmit}>
-      {({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
+      {({ values, touched, errors, handleChange, handleBlur, handleSubmit }) => (
         <form onSubmit={handleSubmit} className="p-4">
           <div className="space-y-5 max-w-3xl">
             <h2> Formulario inicio proceso de ventas </h2>
@@ -139,7 +139,7 @@ const ProcessSaleForm = () => {
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm text-left">
                       <thead className="text-xs uppercase">
-                        <tr className='text-left'>
+                        <tr className="text-left">
                           <th>Producto</th>
                           <th className="pl-3">Cantidad (Kg)</th>
                           <th className="pl-3">Accion</th>
@@ -213,43 +213,6 @@ const ProcessSaleForm = () => {
             </div>
 
             <ProcessSaleConfirmation {...values} />
-
-            <Button text="Agregar Pedido" loading={isSubmitting} />
-
-            {/* <SaleProcessConfirmation>
-              <div className=" grid gap-5 grid-cols-1 md:grid-cols-2  ">
-                <label>Proceso: {values.name}</label>
-                <label>Descripcion: {values.description}</label>
-                <label>Fecha Cierre: {values.closeDate}</label>
-              </div>
-
-              <div className="grid gap-5 grid-cols-1 md:grid-cols-2">
-                <label>Pais: {values.country}</label>
-                <label>Region / estado: {values.region}</label>
-                <label>Ciudad: {values.city}</label>
-                <label>Calle: {values.street}</label>
-                <label>Codigo postal: {values.postalCode}</label>
-              </div>
-              <div className="overflow-x-auto relative">
-                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                      <th>Producto</th>
-                      <th>Cantidad(Kg)</th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    {values.productList.map((product, index) => (
-                      <tr key={index}>
-                        <td>{product.name}</td>
-                        <td>{product.amount}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-                <label>Monto estimado:${values.maxAmount}</label>
-              </div>
-            </SaleProcessConfirmation> */}
           </div>
         </form>
       )}

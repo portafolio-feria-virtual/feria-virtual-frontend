@@ -19,7 +19,9 @@ export const Modal = ({ isOpen, onRequestClose, children }: ModalProps) => {
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
-      border: 'none'
+      border: 'none',
+      'overflow-Y': 'scroll',
+      maxHeight: '90vh'
     }
   };
 

@@ -1,10 +1,9 @@
-import { shippingHeaderCE, shippingsCE } from '../../ui/utils';
+import { shippingStatusPDHeader, shippingPD } from '../../../ui/utils/index';
 
-const ShippingStatusCE = () => {
+const ViewShippingStatusPD = () => {
   return (
-    <div>
-      <h2>Estado de Envíos</h2>
-      <p>En esta sección podrás ver el estado de los envíos a su cargo que se han realizado.</p>
+    <>
+      <h2>Ver estado de envío</h2>
 
       <div className="my-10">
         <h4 className="mb-2">Tipos de estado de envío</h4>
@@ -41,7 +40,7 @@ const ShippingStatusCE = () => {
         <table className="w-full max-w-7xl text-sm text-left text-gray-500">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50">
             <tr className="text-left ">
-              {shippingHeaderCE.map(header => (
+              {shippingStatusPDHeader.map(header => (
                 <th key={header} scope="col" className="py-3 px-6 whitespace-nowrap">
                   {header}
                 </th>
@@ -49,28 +48,28 @@ const ShippingStatusCE = () => {
             </tr>
           </thead>
           <tbody>
-            {shippingsCE.map((shipping, index) => (
+            {shippingPD.map((shipping, index) => (
               <tr key={shipping.id} className="bg-white border-b">
                 <th
                   scope="row"
                   className="py-4 px-6 font-medium text-gray-900/50 whitespace-nowrap">
                   {index + 1}
                 </th>
-                <td className="py-4 px-6">{shipping.bid}</td>
-                <td className="py-4 px-6">{shipping.producerName}</td>
-                <td className="py-4 px-6">{shipping.carrierName}</td>
+
+                <td className="py-4 px-6">{shipping.title}</td>
+                <td className="py-4 px-6">{shipping.price.toLocaleString('ex-CL')}</td>
+                <td className="py-4 px-6">{shipping.productor}</td>
+                <td className="py-4 px-6">{shipping.licitacion}</td>
                 <td className="py-4 px-6">
-                  <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">
-                    {shipping.status}
-                  </span>
+                  <span className="bg-blue-100 text-blue-800">{shipping.status}</span>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-    </div>
+    </>
   );
 };
 
-export default ShippingStatusCE;
+export default ViewShippingStatusPD;

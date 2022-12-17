@@ -1,24 +1,7 @@
 import { useState } from 'react';
-import { IContract } from '../../../../interfaces';
+import { data, viewContractHeader } from '../../../ui/utils';
 import { ContractTable } from './ContractTable';
 import ContractForm from './ContractForm';
-
-const data: IContract[] = [
-  {
-    id: 'AABB00',
-    companyName: 'Ariztia',
-    initDate: '26/10/2021',
-    modifyDate: '27/11/2021',
-    endDate: '25/12/2021'
-  },
-  {
-    id: 'BBAA00',
-    companyName: 'Santa Isabel',
-    initDate: '27/10/2021',
-    modifyDate: '28/11/2021',
-    endDate: '26/12/2021'
-  }
-];
 
 const ViewContract = () => {
   const [search, setSearch] = useState<string>('');
@@ -46,15 +29,6 @@ const ViewContract = () => {
     );
   };
 
-  const viewContractHeader = [
-    'Id contrato',
-    'Empresa',
-    'Fecha Inicio',
-    'Fecha Modificación',
-    'Fecha Término',
-    'Acciones'
-  ];
-
   return (
     <div>
       <h2>Ver Contratos</h2>
@@ -71,11 +45,6 @@ const ViewContract = () => {
         </div>
 
         <ContractForm />
-        {/* <button
-          type="button"
-          className="sm:ml-auto w-full sm:w-fit text-white bg-green-500 hover:bg-green-600 font-medium rounded-lg px-5 py-2 mb-2 sm:mb-0 focus:outline-none">
-          Agregar Contrato
-        </button> */}
       </div>
 
       <div className="overflow-x-auto relative">

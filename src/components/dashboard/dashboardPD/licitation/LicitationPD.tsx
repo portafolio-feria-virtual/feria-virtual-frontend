@@ -1,13 +1,10 @@
-import { Badge } from '../../ui';
-import { licitationHeaderTA, licitationsTA } from '../../ui/utils';
+import { Badge } from '../../../ui';
+import { licitationHeaderCE, licitationsCE } from '../../../ui/utils';
+import CreateOfferPD from './CreateOfferPD';
 
-const ViewLicitationTA = () => {
+const LicitationPD = () => {
   return (
     <>
-      <h2>Ver Licitaciones</h2>
-
-      <p>En esta sección podrás ver las licitaciones para postular a envíos.</p>
-
       <div className="my-10">
         <h4 className="mb-2">Tipos de estado de licitación</h4>
         <ul className="flex space-x-3">
@@ -43,16 +40,16 @@ const ViewLicitationTA = () => {
         <table className="w-full text-sm text-left text-gray-500">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50">
             <tr className="text-left">
-              {licitationHeaderTA.map(header => (
-                <th key={header} scope="col" className="py-3 px-6">
+              {licitationHeaderCE.map(header => (
+                <th key={header} scope="col" className="py-3 px-6 whitespace-nowrap">
                   {header}
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {licitationsTA.map((licitation, index) => (
-              <tr key={licitation.id} className="bg-white border-b">
+            {licitationsCE.map((licitation, index) => (
+              <tr key={licitation.id} className="bg-white border-b whitespace-nowrap">
                 <th
                   scope="row"
                   className="py-4 px-6 font-medium text-gray-900/50 whitespace-nowrap">
@@ -78,9 +75,12 @@ const ViewLicitationTA = () => {
                 <td className="py-4 px-6">{<Badge status={licitation.closed} />}</td>
 
                 <td className="py-4">
-                  <button className="bg-green-500 px-2 py-1 text-white rounded-md">
-                    Crear oferta transporte
-                  </button>
+                  <CreateOfferPD
+                    name={licitation.name}
+                    description={licitation.description}
+                    licitation={licitation.endDate}
+                    value={licitation.maxAmount}
+                  />
                 </td>
               </tr>
             ))}
@@ -91,4 +91,4 @@ const ViewLicitationTA = () => {
   );
 };
 
-export default ViewLicitationTA;
+export default LicitationPD;

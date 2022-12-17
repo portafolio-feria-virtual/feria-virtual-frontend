@@ -12,6 +12,7 @@ export interface SidebarDataProps {
     }[];
   }[];
   userType: string;
+  userName: string;
 }
 
 export interface SidebarProps {

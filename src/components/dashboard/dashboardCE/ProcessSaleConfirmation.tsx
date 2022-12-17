@@ -1,22 +1,26 @@
 import { useState } from 'react';
-import { Modal } from '../../ui';
+import { Button, Modal } from '../../ui';
 import { IProcessSale } from '../../../interfaces';
-import { AuthContext } from '../../../contexts/authContext';
+import CarrierOfferCE from './CarrierOfferCE';
+import ProducerOfferCE from './ProducerOfferCE';
+import { toast } from 'react-hot-toast';
 
 export const ProcessSaleConfirmation = (data: IProcessSale) => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    toast.success('Proceso de ventas creado con éxito', {
+      duration: 3000
+    });
+
+    setOpen(false);
+  };
 
   const handleOpen = () => setOpen(true);
 
   return (
     <>
-      <button
-        onClick={handleOpen}
-        className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">
-        Procesar venta
-      </button>
+      <Button onClick={handleOpen} text="Agregar Pedido" />
 
       <Modal isOpen={open} onRequestClose={handleClose}>
         <h2 className="text-green-600 mb-5">Resumen del proceso</h2>
@@ -77,6 +81,14 @@ export const ProcessSaleConfirmation = (data: IProcessSale) => {
               </tbody>
             </table>
           </div>
+
+          <div className="py-10 space-y-5">
+            <CarrierOfferCE />
+
+            <ProducerOfferCE />
+          </div>
+
+          <Button onClick={handleClose} text="Procesar Venta" />
         </form>
       </Modal>
     </>

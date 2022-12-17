@@ -1,36 +1,5 @@
 import DownloadConfirmation from './DownloadConfirmation';
-
-const reportHeader = ['#', 'Nombre', 'Descripción', 'Fecha de creación', 'Acciones'];
-
-const saleReport = [
-  {
-    id: '1',
-    name: 'Reporte 1',
-    description: 'Reporte de ventas',
-    createdAt: '2021-05-01'
-  },
-  {
-    id: '2',
-    name: 'Reporte 2',
-    description: 'Reporte de ventas',
-    createdAt: '2021-05-01'
-  }
-];
-
-const lossReport = [
-  {
-    id: '1',
-    name: 'Reporte 1',
-    description: 'Reporte de perdida',
-    createdAt: '2021-05-01'
-  },
-  {
-    id: '2',
-    name: 'Reporte 2',
-    description: 'Reporte de perdida',
-    createdAt: '2021-05-01'
-  }
-];
+import { lossReportCON, reportHeaderCON, saleReportCON } from '../../ui/utils';
 
 const GenerateReport = () => {
   return (
@@ -44,7 +13,7 @@ const GenerateReport = () => {
         <table className="w-full max-w-7xl text-sm text-left text-gray-500">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50">
             <tr className="text-left">
-              {reportHeader.map(header => (
+              {reportHeaderCON.map(header => (
                 <th key={header} scope="col" className="py-3 px-6">
                   {header}
                 </th>
@@ -52,7 +21,7 @@ const GenerateReport = () => {
             </tr>
           </thead>
           <tbody>
-            {saleReport.map((report, index) => (
+            {saleReportCON.map((report, index) => (
               <tr key={report.id} className="bg-white border-b">
                 <th
                   scope="row"
@@ -76,7 +45,7 @@ const GenerateReport = () => {
         <table className="w-full max-w-7xl text-sm text-left text-gray-500">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50">
             <tr className="text-left">
-              {reportHeader.map(header => (
+              {reportHeaderCON.map(header => (
                 <th key={header} scope="col" className="py-3 px-6">
                   {header}
                 </th>
@@ -84,7 +53,7 @@ const GenerateReport = () => {
             </tr>
           </thead>
           <tbody>
-            {lossReport.map((report, index) => (
+            {lossReportCON.map((report, index) => (
               <tr key={report.id} className="bg-white border-b">
                 <th
                   scope="row"

@@ -10,7 +10,7 @@ export enum ShippingStatus {
   'Recibido en destino'
 }
 
-const UpdateStatusShipping = ({ id }: { id: string }) => {
+const UpdateStatusShipping = ({ id, status }: { id: string; status: boolean }) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -23,8 +23,11 @@ const UpdateStatusShipping = ({ id }: { id: string }) => {
   return (
     <>
       <button
-        className="border-dashed border-2 border-slate-500/50 flex space-x-2 items-center p-2 rounded-md"
-        onClick={handleOpen}>
+        className={`border-dashed border-2 border-slate-500/50 flex space-x-2 items-center p-2 rounded-md ${
+          !status && 'cursor-not-allowed opacity-50'
+        }`}
+        onClick={handleOpen}
+        {...(!status && { disabled: true })}>
         <MdUpdate size={20} />
         <span className="font-semibold">Actualizar estado</span>
       </button>

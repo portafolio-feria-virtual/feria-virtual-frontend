@@ -13,6 +13,8 @@ import DashboardConsultor from './dashboardConsultor/DashboardConsultor';
 import DashboardTA from './dashboardTA/DashboardTA';
 import DashboardAdmin from './dashboardAdmin/DashboardAdmin';
 import DashboardCL from './dashboardCL/DashboardCL';
+import { Toaster } from 'react-hot-toast';
+import DashboardPD from './dashboardPD/DashboardPD';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -21,7 +23,7 @@ const Dashboard = () => {
     <>
       {/* <ProcessSaleForm /> */}
 
-      <DashboardAdmin />
+      <DashboardPD />
 
       {/* {user && (
         <>
@@ -29,6 +31,8 @@ const Dashboard = () => {
           {user.type === UserType.CLIENTE_LOCAL && <DashboardCL />}
         </>
       )} */}
+
+      <Toaster position="top-right" />
     </>
   );
 };

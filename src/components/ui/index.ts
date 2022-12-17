@@ -5,3 +5,4 @@ export * from './Button';
 export * from './Country';
 export * from './Modal';
 export * from './Avatar';
+export * from './Badge';

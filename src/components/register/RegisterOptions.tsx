@@ -8,7 +8,9 @@ export const RegisterOptions = () => {
         <ul className="border-y border-slate-200 space-x-5 flex justify-between whitespace-nowrap">
           {registerItems.map(item => (
             <li key={item.id} className="py-5">
-              <NavLink to={item.path}>{item.name}</NavLink>
+              <NavLink to={item.path} type="item">
+                {item.name}
+              </NavLink>
             </li>
           ))}
         </ul>

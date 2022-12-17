@@ -1,32 +1,14 @@
-import { AiFillHome } from 'react-icons/ai';
 import { Outlet } from 'react-router-dom';
-import { SidebarDataProps } from '../../../interfaces';
 import Sidebar from '../../layout/Sidebar';
-
-const dataCE: SidebarDataProps = {
-  pageType: 'Usuarios',
-  items: [
-    {
-      path: '/panel/usuario/hola',
-      name: 'Inicio',
-      icon: <AiFillHome className="w-6 h-6 text-inherit" />
-    },
-    {
-      path: '/panel/usuario/chao',
-      name: 'Inicio',
-      icon: <AiFillHome className="w-6 h-6 text-inherit" />
-    }
-  ],
-  userType: 'Cliente Extrajero'
-};
+import { sidebarCE } from '../../utils/sidebarItems';
 
 const DashboardCE = () => {
   return (
     <div className="flex">
       {/* Enviar usuario */}
-      <Sidebar data={dataCE} />
+      <Sidebar data={sidebarCE} />
 
-      <div className="p-4">
+      <div className="p-10 w-full">
         <Outlet />
       </div>
     </div>

@@ -1,25 +1,6 @@
+import { Badge } from '../../ui';
+import { shippingHeaderTA, shippingsTA } from '../../ui/utils';
 import UpdateStatusShipping from './UpdateStatusShipping';
-
-const shippingHeader = [
-  'N°',
-  'Nombre',
-  'Descripción',
-  'Hacia',
-  'Fecha de creación',
-  'Estado',
-  'Acciones'
-];
-
-const shippings = [
-  {
-    id: '1',
-    name: 'Envio 1',
-    description: 'Envio de productos',
-    to: 'Cliente 1',
-    createdAt: '2021-05-01',
-    status: 'Preparando envío'
-  }
-];
 
 const ShippingStatusTA = () => {
   return (
@@ -61,33 +42,33 @@ const ShippingStatusTA = () => {
       <div>
         <table className="w-full max-w-7xl text-sm text-left text-gray-500">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50">
-            <tr className="text-left">
-              {shippingHeader.map(header => (
-                <th key={header} scope="col" className="py-3 px-6">
+            <tr className="text-left ">
+              {shippingHeaderTA.map(header => (
+                <th key={header} scope="col" className="py-3 px-6 whitespace-nowrap">
                   {header}
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {shippings.map((shipping, index) => (
+            {shippingsTA.map((shipping, index) => (
               <tr key={shipping.id} className="bg-white border-b">
                 <th
                   scope="row"
                   className="py-4 px-6 font-medium text-gray-900/50 whitespace-nowrap">
                   {index + 1}
                 </th>
-                <td className="py-4 px-6">{shipping.name}</td>
-                <td className="py-4 px-6">{shipping.description}</td>
-                <td className="py-4 px-6">{shipping.to}</td>
-                <td className="py-4 px-6">{shipping.createdAt}</td>
+                <td className="py-4 px-6">{shipping.bid}</td>
+                <td className="py-4 px-6">{shipping.producerName}</td>
+                <td className="py-4 px-6">{shipping.carrierName}</td>
+                <td className="py-4 px-6">{<Badge status={shipping.editable} />}</td>
                 <td className="py-4 px-6">
                   <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">
                     {shipping.status}
                   </span>
                 </td>
                 <td className="py-4 px-6">
-                  <UpdateStatusShipping id={shipping.id} />
+                  {<UpdateStatusShipping id={shipping.id} status={shipping.editable} />}
                 </td>
               </tr>
             ))}

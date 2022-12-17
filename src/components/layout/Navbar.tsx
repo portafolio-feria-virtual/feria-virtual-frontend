@@ -6,7 +6,7 @@ const Navbar = () => {
     <header className="sticky top-0 z-40 backdrop-blur transition-colors duration-500 supports-backdrop-blur:bg-white/20 bg-slate-50/90 flex-none w-full px-4 lg:border-b lg:border-slate-600/10">
       <article className="max-w-7xl mx-auto">
         <section className="relative block lg:flex items-center justify-between border-b lg:border-0 py-7 border-slate-700/10">
-          <Link to="/" className="block max-w-min">
+          <Link to="/" className="block">
             <img src={logo} alt="Logo" className="w-14" />
           </Link>
 
